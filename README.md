@@ -11,3 +11,8 @@ Personal site of Fedor Lushnikov: **https://fedorlushnikov.com**
 1. `git clone` this repo, open it with `claude`.
 2. Ask for the change, check `site/index.html` in the browser.
 3. Commit and push to `main`: the site updates by itself.
+
+## История и база знаний
+- [docs/ACTIVITY.md](docs/ACTIVITY.md): журнал всех правок сайта.
+- [docs/KNOWLEDGE.md](docs/KNOWLEDGE.md): как устроен сайт, хостинг, форма, решения.
+- `CLAUDE.md`: Claude Code сам дописывает журнал при каждой правке.
