@@ -1,14 +1,13 @@
-# Client-Fedor-Lushnikov
+# fedorlushnikov.com
 
-Сайт-био клиента Global Generation Фёдора Лушникова: **https://fedorlushnikov.com** (поступление в США, Computer Science, Fall 2027).
+Personal site of Fedor Lushnikov: **https://fedorlushnikov.com**
 
-- Код сайта: `site/` (один `index.html`, картинки `site/img/`, шрифты `site/fonts/`). Сайт на английском.
-- Хостинг: S3 `fedorlushnikov-site-818034793268` + CloudFront `E2QUX3F37GPA88` (AWS 818034793268, us-east-1).
-- Деплой: push в `main` → GitHub Actions `deploy.yml` (OIDC-роль `github-actions-client-fedor-lushnikov-deploy`, только этот бакет и эта раздача) → проверка, что прод совпадает с `main`. В `main` только по «Деплой» Льва.
-- Почта: hello@fedorlushnikov.com принимает SES и пересылает Фёдору (Lambda `fedorlushnikov-inbound-forward`, копия в S3 `gg-inbound-mail-818034793268/fedorlushnikov/`).
+- Code: `site/` (one `index.html`, images in `site/img/`, fonts in `site/fonts/`).
+- Hosting: GitHub Pages. Every push to `main` that touches `site/` deploys automatically (workflow `.github/workflows/pages.yml`), live in about a minute.
+- Domain: `site/CNAME`. DNS points to GitHub Pages.
+- Contact form: sends to Fedor's Gmail through formsubmit.co (no server).
 
-## Правила правок
-- Правки присылает Фёдор в чат «Федор | Global Gen»; разбираются раз в день, одним PR.
-- Только факты, которые Фёдор сам подтвердил в чате или которые есть на его сайтах (serenityapps.online и т.п.). Цифры, награды, имена не придумывать.
-- Без длинного тире. Фото людей только настоящие, от Фёдора.
-- Перед PR скрин страницы (десктоп 1440 и телефон 390).
+## Editing with Claude Code
+1. `git clone` this repo, open it with `claude`.
+2. Ask for the change, check `site/index.html` in the browser.
+3. Commit and push to `main`: the site updates by itself.
