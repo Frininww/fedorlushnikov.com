@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Fedor Lushnikov</title>
+<meta name="description" content="Fedor Lushnikov: high school senior from Moscow building small tools that help people train, focus and stay healthy. Applying to study Computer Science in the US.">
+<meta name="theme-color" content="#0d3b2c">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+@font-face{font-family:"Space Grotesk";font-weight:500;font-display:swap;src:url(fonts/space-grotesk-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Space Grotesk";font-weight:700;font-display:swap;src:url(fonts/space-grotesk-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Anton";font-weight:400;font-display:swap;src:url(fonts/anton-latin-400-normal.woff2) format("woff2")}
+@property --n{syntax:"<integer>";inherits:false;initial-value:0}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@property --p{syntax:"<number>";inherits:false;initial-value:0}
+:root{
+  --pitch:#0d3b2c;--chalk:#f3f4ee;--paper:#ffffff;--ink:#0f1a16;--muted:#5b6b64;--line:#dfe3dd;
+  --lime:#cde56b;--lime-ink:#16200a;
+  --night:#070b08;--card:#111612;--card-2:#171e18;--stroke:rgba(255,255,255,.07);--text:#f2f4ee;--dim:#97a39a;--soft:#c9d1ca;
+  --poster:"Anton",Impact,"Arial Narrow",sans-serif;--display:"Space Grotesk",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,sans-serif;--mono:"Inter",system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);--r:34px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--text);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--lime);color:var(--lime-ink)}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.035em;line-height:1.02}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* section themes */
+.dark{position:relative;color:var(--text);background:linear-gradient(180deg,rgba(7,11,8,.8),rgba(7,11,8,.9)),url(img/grass.webp) center/cover no-repeat,var(--night)}
+.light{position:relative;color:var(--ink);background:var(--chalk);
+  --card:#ffffff;--card-2:#f4f5f0;--stroke:rgba(15,26,22,.09);--text:var(--ink);--dim:#64736c;--soft:#3d4c45}
+.light.white{background:var(--paper);--card-2:#f3f4ee}
+.light .screen,.light .tile,.light .fx,.light .news-item{box-shadow:0 1px 0 rgba(15,26,22,.04),0 24px 50px -32px rgba(13,59,44,.35)}
+.light .pill{background:var(--pitch);color:var(--lime)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.88);backdrop-filter:blur(10px) saturate(1.4);color:var(--ink);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.mono{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 17px var(--display)}
+.mono svg{width:34px;height:34px;transition:transform .5s var(--ease)}
+.mono:hover svg{transform:rotate(-360deg)}
+.nav ul{display:flex;gap:6px;list-style:none;font-size:15px}
+.nav ul a{display:block;padding:7px 13px;border-radius:999px;text-decoration:none;color:#3a4a43;transition:background .2s,color .2s}
+.nav ul a:hover{background:var(--pitch);color:var(--lime)}
+.nav .cta{padding:9px 16px;border-radius:999px;background:var(--ink);color:var(--paper);font:600 14px var(--body);text-decoration:none;transition:background .2s,color .2s}
+.nav .cta:hover{background:var(--lime);color:var(--lime-ink)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--paper);color:var(--ink);height:clamp(640px,calc(100vh - 60px),920px)}
+.hero-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hero-lines *{fill:none;stroke:#e6ebe4;stroke-width:2;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s .2s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero-top{position:absolute;top:44px;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-start;z-index:4}
+.hq{max-width:320px;animation:fade .8s .7s both}
+.hq b{display:block;font:400 44px/0.6 var(--poster);color:var(--pitch);height:22px}
+.hq p{font:700 16px/1.3 var(--display);letter-spacing:0;text-transform:uppercase}
+.hq span{display:block;margin-top:10px;font-size:13px;color:var(--muted)}
+.hnum{text-align:right;animation:fade .8s .8s both}
+.hnum b{display:block;font:400 clamp(80px,min(11vw,19vh),170px)/.85 var(--poster);color:transparent;-webkit-text-stroke:1.5px var(--ink);
+  background:repeating-linear-gradient(135deg,var(--ink) 0 1.5px,transparent 1.5px 7px) 0 0/200% 200%;-webkit-background-clip:text;background-clip:text; }
+@keyframes hatch{to{background-position:100% 100%}}
+.hnum span{display:block;margin-top:10px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.hero-name{position:absolute;left:0;right:0;bottom:200px;text-align:center;white-space:nowrap;z-index:1;
+  font:400 clamp(64px,min(13.4vw,23vh),212px)/.88 var(--poster);color:var(--ink);letter-spacing:.005em;text-transform:uppercase}
+.hero-name .w{display:inline-block;overflow:hidden;vertical-align:top;padding-top:.04em}
+.hero-name i{display:inline-block;font-style:normal;animation:letter .9s var(--ease) both;animation-delay:calc(var(--i) * 45ms)}
+@keyframes letter{from{transform:translateY(105%)}to{transform:none}}
+.hero-photo{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:94%;width:auto;z-index:2;animation:photo 1.1s .35s var(--ease) both;
+  -webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 99%);mask-image:linear-gradient(180deg,#000 82%,transparent 99%)}
+@keyframes photo{from{opacity:0;transform:translate(-50%,60px) scale(.96)}to{opacity:1;transform:translateX(-50%)}}
+.chip{position:absolute;z-index:3;display:flex;align-items:center;gap:8px;padding:9px 14px 9px 9px;border-radius:999px;background:rgba(255,255,255,.88);backdrop-filter:blur(8px);border:1px solid var(--line);box-shadow:0 14px 30px -16px rgba(0,0,0,.35);font:600 13px var(--body);color:var(--ink);animation:fade .8s both,bob 9s ease-in-out infinite}
+.chip b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--pitch);color:var(--lime)}
+.chip b .i{width:15px;height:15px}
+.chip.c1{left:calc(50% + 150px);top:17%;animation-delay:1.1s,0s}
+.chip.c2{right:calc(50% + 170px);top:31%;animation-delay:1.3s,1.2s}
+.chip.c3{left:calc(50% + 185px);top:36%;animation-delay:1.5s,2.4s}
+@keyframes bob{50%{translate:0 -5px}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero-bottom{position:absolute;left:0;right:0;bottom:36px;display:flex;justify-content:space-between;align-items:flex-end;z-index:4}
+.hcard{display:block;width:280px;border-radius:18px;text-decoration:none;overflow:hidden;box-shadow:0 24px 50px -24px rgba(0,0,0,.5);transition:transform .6s var(--ease);animation:fade .8s 1s both}
+.hcard:hover{transform:translateY(-4px) rotate(-1deg)}
+.hcard.proj{position:relative;color:#f2f4ee;padding:18px 18px 16px;min-height:150px;background:linear-gradient(180deg,rgba(7,11,8,.1),rgba(7,11,8,.92)),url(img/lockedin.webp) center/cover}
+.hcard.proj .play{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--lime);color:var(--lime-ink);margin-bottom:30px;box-shadow:0 0 0 0 rgba(205,229,107,.6);animation:ping 4s ease-out infinite}
+@keyframes ping{70%{box-shadow:0 0 0 14px rgba(205,229,107,0)}100%{box-shadow:0 0 0 0 rgba(205,229,107,0)}}
+.hcard.proj b{display:block;font:700 18px var(--display);letter-spacing:-.02em}
+.hcard.proj small{display:block;margin-top:4px;font:500 12px var(--mono);color:#c3cdc5}
+.hcard.next{background:#111612;color:#f2f4ee;padding:16px 18px;animation-delay:1.1s}
+.hcard.next .row{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.pill{display:inline-block;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--lime);color:var(--lime-ink);padding:5px 10px;border-radius:999px}
+.route{display:flex;align-items:center;justify-content:space-between;margin:18px 0 14px;font:700 20px var(--display)}
+.route i{position:relative;flex:1;height:1px;margin:0 12px;background:repeating-linear-gradient(90deg,#6f7c72 0 4px,transparent 4px 8px)}
+.route i::after{content:"";position:absolute;top:-4px;left:0;width:9px;height:9px;border-radius:50%;background:var(--lime);animation:fly 6s ease-in-out infinite}
+@keyframes fly{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:calc(100% - 9px);opacity:0}}
+.hcard.next .row:last-child{color:#97a39a}
+
+/* marquee */
+.bands{position:relative;height:150px;overflow:hidden;background:var(--chalk);margin-bottom:-40px;z-index:5}
+.band{position:absolute;left:-5%;width:110%;display:flex;overflow:hidden;white-space:nowrap;padding:16px 0;font:400 34px/1 var(--poster);letter-spacing:.02em;text-transform:uppercase}
+.band.b1{top:24px;background:var(--lime);color:var(--lime-ink);transform:rotate(-2.2deg);z-index:2}
+.band.b2{top:64px;background:var(--ink);color:var(--chalk);transform:rotate(1.6deg)}
+.band .track{display:flex;flex:none;animation:marquee 60s linear infinite}
+.band.b2 .track{animation-direction:reverse;animation-duration:32s}
+.band span{display:flex;align-items:center;gap:28px;padding-right:28px}
+.band span::after{content:"";width:12px;height:12px;border-radius:50%;background:currentColor;opacity:.6}
+.band.b2 span::after{background:var(--lime);opacity:1}
+@keyframes marquee{to{transform:translateX(-100%)}}
+
+section{padding:96px 0}
+.sec-h{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:36px}
+.sec-h h2{font-size:clamp(34px,4.4vw,58px);margin-top:12px;max-width:16ch}
+.sec-h p{max-width:40ch;color:var(--dim)}
+.screen{position:relative;background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);overflow:hidden;isolation:isolate;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;border:0;cursor:pointer;font:600 15px var(--body);text-decoration:none;text-transform:uppercase;letter-spacing:.02em;transition:transform .2s var(--ease),box-shadow .2s,background .2s}
+.btn.lime{background:var(--lime);color:var(--lime-ink)}
+.btn.ink{background:var(--ink);color:var(--paper)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn .i{transition:transform .25s var(--ease)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(205,229,107,.55)}
+.btn.ink:hover{box-shadow:0 14px 30px -12px rgba(15,26,22,.55)}
+.btn:hover .i{transform:translateX(4px)}
+.social{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;color:var(--soft)}
+.social span{display:flex;align-items:center;gap:7px}
+
+/* glow border on hover */
+.glow{isolation:isolate}
+.glow::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--a),transparent 0 65%,var(--lime) 80%,transparent 95%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;animation:spin 10s linear infinite;pointer-events:none;z-index:3}
+.light .glow::after{background:conic-gradient(from var(--a),transparent 0 65%,var(--pitch) 80%,transparent 95%)}
+.glow:hover::after{opacity:1}
+@keyframes spin{to{--a:360deg}}
+
+/* tiles + counters */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tile{position:relative;background:var(--card);border:1px solid var(--stroke);border-radius:26px;padding:24px 22px 22px;min-height:184px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .6s var(--ease),border-color .3s}
+.tile:hover{transform:translateY(-6px);border-color:rgba(205,229,107,.35)}
+.tile .pill{position:absolute;top:18px;right:18px}
+.tile .ic{position:absolute;top:20px;left:22px;color:var(--pitch);width:22px;height:22px}
+.dark .tile .ic{color:var(--lime)}
+.tile b{font:700 48px/1 var(--display);letter-spacing:-.04em}
+.tile>span:not(.pill){display:block;margin-top:8px;font-size:14px;color:var(--dim);line-height:1.4}
+.count{counter-reset:n var(--n);animation:count 2s var(--ease) .3s both}
+.count::before{content:counter(n)}
+.count.c27{--to:27}.count.c1300{--to:1300}.count.c3{--to:3}
+@keyframes count{from{--n:0}to{--n:var(--to)}}
+
+/* org logos */
+.orgs{padding:0 0 96px}
+.orgs .eyebrow{display:block;text-align:center;margin-bottom:22px}
+.org-strip{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.org-track{display:flex;width:max-content;animation:marquee 80s linear infinite}
+.org-strip:hover .org-track{animation-play-state:paused}
+.org-track>div{display:flex;gap:16px;padding-right:16px}
+.org{display:grid;place-items:center;width:230px;height:92px;border-radius:22px;background:var(--paper);border:1px solid var(--stroke);transition:transform .6s var(--ease),box-shadow .3s}
+.org svg{width:190px;height:52px;filter:grayscale(1) contrast(.9);opacity:.75;transition:filter .4s,opacity .4s}
+.org:hover{transform:translateY(-4px);box-shadow:0 20px 40px -26px rgba(13,59,44,.5)}
+.org:hover svg{filter:none;opacity:1}
+
+/* story */
+.story-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+.story-photo{height:300px;background:url(img/story.webp) center 30%/cover;position:relative}
+.story-photo::after{content:"";position:absolute;inset:-2px;background:linear-gradient(180deg,transparent 40%,var(--card))}
+.story-photo .pill{position:absolute;top:22px;left:22px;z-index:1}
+.story-text{padding:0 40px 40px}
+.story-text h2{font-size:clamp(34px,4.2vw,54px);margin:6px 0 24px}
+.story-text p{color:var(--soft);margin-bottom:16px}
+.story-text p:first-of-type{font:500 21px/1.45 var(--display);letter-spacing:-.01em;color:var(--text)}
+.side{padding:22px}
+.side-h{display:flex;justify-content:space-between;align-items:center;padding:4px 4px 18px;font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.side-h strong{color:var(--text);font-weight:500;display:flex;align-items:center;gap:8px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:live 3s ease-in-out infinite}
+@keyframes live{50%{opacity:.25;transform:scale(.7)}}
+.side h3{font-size:26px;margin:26px 4px 14px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.col h4{font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 4px 8px}
+.card{background:var(--card-2);border:1px solid var(--stroke);border-radius:14px;padding:10px;font-size:12.5px;line-height:1.35;margin-bottom:8px;transition:transform .25s var(--ease)}
+.card:hover{transform:translateY(-3px) rotate(-1.5deg)}
+.card small{display:block;margin-top:6px;font:500 10px var(--mono);color:var(--dim)}
+.col.doing .card{border-color:rgba(205,229,107,.45)}
+.col.done .card{background:rgba(205,229,107,.1);border-color:rgba(205,229,107,.22)}
+.card.mover{animation:mover 12s var(--ease) infinite}
+@keyframes mover{0%,30%{transform:none;opacity:1}42%{transform:translateX(calc(100% + 8px)) rotate(3deg);opacity:1}50%,85%{transform:translateX(calc(100% + 8px));opacity:0}100%{transform:none;opacity:1}}
+.fixture{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;background:var(--card-2);border:1px solid var(--stroke);border-radius:20px;padding:16px 18px;margin-bottom:10px;transition:border-color .25s,transform .25s var(--ease)}
+.fixture:hover{border-color:rgba(205,229,107,.45);transform:translateX(4px)}
+.fixture b{font:700 16px var(--display);letter-spacing:-.02em}
+.fixture b:last-child{text-align:right}
+.fixture span{font:500 11px/1.25 var(--mono);text-align:center;color:var(--dim);text-transform:uppercase}
+
+/* rolling ball divider */
+.roll{position:relative;height:90px;overflow:hidden;margin-top:-30px}
+.roll::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dashed rgba(15,26,22,.14)}
+.ball{position:absolute;top:50%;left:-60px;width:52px;height:52px;margin-top:-26px;animation:roll 18s linear infinite}
+@keyframes roll{from{transform:translateX(0) rotate(0)}to{transform:translateX(calc(100vw + 120px)) rotate(1080deg)}}
+
+/* bot showcase */
+.bot{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;padding:56px;background:radial-gradient(circle at 85% 40%,rgba(205,229,107,.35),transparent 45%),var(--card)}
+.bot h3{font-size:clamp(44px,5vw,68px);letter-spacing:-.045em;margin:14px 0 6px}
+.bot .handle{font:500 15px var(--mono);color:var(--dim)}
+.bot>div>p{margin:20px 0;color:var(--soft)}
+.steps{list-style:none;display:grid;gap:12px;margin-bottom:26px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;font-size:15px;color:var(--soft);counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--pitch);color:var(--lime);font:700 14px var(--display)}
+.steps b{color:var(--text);font-weight:600}
+.bot .acts{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.stage{position:relative;height:620px;perspective:1600px}
+.phone{position:absolute;width:272px;height:570px;border-radius:46px;background:#0b0e12;padding:9px;box-shadow:0 0 0 1.5px #2b313a,0 0 0 5px #0b0e12,0 60px 90px -40px rgba(7,11,8,.75),inset 0 0 0 1px #3a414b}
+.phone::before{content:"";position:absolute;top:17px;left:50%;width:88px;height:24px;margin-left:-44px;border-radius:20px;background:#000;z-index:5}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:38px;overflow:hidden;background:#0e1621;color:#f5f5f5;font:13px/1.4 -apple-system,"Inter",system-ui,sans-serif}
+.p1{left:-1%;top:34px;transform:rotateY(14deg) rotateZ(-3deg);animation:float1 12s ease-in-out infinite;z-index:2}
+.p2{right:-2%;top:0;transform:rotateY(-12deg) rotateZ(3deg);animation:float2 14s ease-in-out infinite}
+@keyframes float1{50%{translate:0 -7px}}
+@keyframes float2{50%{translate:0 6px}}
+.sbar{display:flex;justify-content:space-between;padding:15px 26px 0;font:600 12px -apple-system,"Inter",sans-serif;height:44px}
+.sbar i{display:flex;gap:4px;align-items:center}
+.sbar i::before{content:"";width:17px;height:9px;border-radius:3px;border:1.5px solid currentColor;opacity:.9}
+.tg-h{display:flex;align-items:center;gap:10px;padding:6px 14px 10px;background:#17212b;border-bottom:1px solid #0b1118}
+.tg-h img{width:34px;height:34px;border-radius:50%}
+.tg-h b{display:block;font-size:14px}
+.tg-h small{color:#7d8b99;font-size:11.5px}
+.chat{position:absolute;left:0;right:0;top:100px;bottom:52px;overflow:hidden;background:#0e1621 radial-gradient(circle at 30% 20%,rgba(43,82,120,.25),transparent 60%)}
+.feed{position:absolute;left:0;right:0;top:12px;padding:0 10px;display:flex;flex-direction:column;gap:7px;animation:feed 18s var(--ease) infinite}
+.msg{max-width:86%;padding:8px 11px;border-radius:14px;font-size:12px;line-height:1.42;opacity:0}
+.msg.in{align-self:flex-start;background:#182533;border-bottom-left-radius:4px}
+.msg.out{align-self:flex-end;background:#2b5278;border-bottom-right-radius:4px}
+.msg em{font-style:normal;color:#6ab3f3}
+.msg ol{margin:4px 0 4px 16px}
+.msg .t{display:block;text-align:right;font-size:10px;color:#7d8b99;margin-top:2px}
+.kb{align-self:flex-start;width:86%;padding:9px;border-radius:10px;background:#1f2f3f;text-align:center;font-weight:600;font-size:12.5px;opacity:0}
+.goal{display:flex;align-items:center;gap:8px;padding:5px 0;border-top:1px solid rgba(255,255,255,.06)}
+.goal:first-of-type{border-top:0}
+.goal i{position:relative;width:16px;height:16px;border-radius:5px;border:1.5px solid #6ab3f3;flex:none}
+.goal i::after{content:"";position:absolute;inset:2px;border-radius:2px;background:#6ab3f3;transform:scale(0)}
+.g1 i::after{animation:tick1 18s infinite}.g2 i::after{animation:tick2 18s infinite}.g3 i::after{animation:tick3 18s infinite}
+.streak{display:flex;align-items:center;gap:6px;margin-top:6px;font-weight:600;color:#f5a54a}
+.streak .i{width:14px;height:14px}
+.m1{animation:m1 18s infinite}.typing{animation:typing 18s infinite}.m2{animation:m2 18s infinite}.kb{animation:kb 18s infinite}.m3{animation:m3 18s infinite}.m4{animation:m4 18s infinite}
+@keyframes m1{0%,4%{opacity:0;transform:translateY(10px)}7%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes typing{0%,9%{opacity:0;display:block}11%,17%{opacity:1}19%,100%{opacity:0;height:0;padding:0;margin:-7px 0 0}}
+@keyframes m2{0%,18%{opacity:0;transform:translateY(10px) scale(.97)}22%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes kb{0%,24%{opacity:0}27%,94%{opacity:1}36%{background:#1f2f3f}38%{background:#3a5a7a}41%{background:#1f2f3f}100%{opacity:0}}
+@keyframes m3{0%,42%{opacity:0;transform:translateY(10px)}45%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes m4{0%,50%{opacity:0;transform:translateY(10px) scale(.97)}54%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes feed{0%,40%{transform:none}52%,96%{transform:translateY(-300px)}100%{transform:none}}
+@keyframes tick1{0%,60%{transform:scale(0)}63%,95%{transform:scale(1)}100%{transform:scale(0)}}
+@keyframes tick2{0%,67%{transform:scale(0)}70%,95%{transform:scale(1)}100%{transform:scale(0)}}
+@keyframes tick3{0%,74%{transform:scale(0)}77%,95%{transform:scale(1)}100%{transform:scale(0)}}
+.dots{display:flex;gap:4px;padding:3px 2px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#7d8b99;animation:dot 1.4s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dot{50%{transform:translateY(-3px);opacity:.4}}
+.inp{position:absolute;left:0;right:0;bottom:0;height:52px;display:flex;align-items:center;gap:8px;padding:0 10px 6px;background:#17212b}
+.inp span{flex:1;height:32px;border-radius:16px;background:#0e1621;color:#7d8b99;font-size:12px;display:flex;align-items:center;padding:0 12px}
+.inp b{display:grid;place-items:center;height:32px;padding:0 12px;border-radius:16px;background:#3e88f7;color:#fff;font-size:12px;font-weight:600;gap:4px}
+/* mini app */
+.app{position:absolute;inset:44px 0 0;background:#141c26;overflow:hidden}
+.app-h{display:flex;align-items:center;gap:8px;padding:6px 14px 10px;font-size:13px}
+.app-h img{width:22px;height:22px;border-radius:50%}
+.slides{display:flex;width:300%;height:calc(100% - 40px);animation:slides 18s var(--ease) infinite}
+.slide{width:33.333%;padding:6px 12px}
+@keyframes slides{0%,30%{transform:none}35%,63%{transform:translateX(-33.333%)}68%,95%{transform:translateX(-66.666%)}100%{transform:none}}
+.panel{background:#1b2532;border:1px solid #263345;border-radius:20px;padding:16px 14px}
+.panel h5{font:700 18px/1.15 -apple-system,"Inter",sans-serif;letter-spacing:-.02em;margin-bottom:4px}
+.panel p{font-size:11.5px;color:#93a0ae;margin-bottom:10px}
+.lbl{display:block;font-size:10.5px;color:#93a0ae;margin:9px 2px 5px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:3px;border-radius:12px;background:#243041;font-size:11.5px;font-weight:600;text-align:center;color:#93a0ae}
+.seg span{padding:7px 0;border-radius:9px}
+.seg span.on{background:#121a24;color:#fff}
+.seg.two{grid-template-columns:1fr 1fr}
+.fld{height:34px;border-radius:11px;border:1px solid #2d3a4c;background:#121a24;display:flex;align-items:center;padding:0 11px;font-size:12.5px}
+.typed{display:inline-block;overflow:hidden;white-space:nowrap;width:0;border-right:2px solid #6ab3f3;animation:typeName 18s steps(5) infinite,caret 1.2s ease-in-out infinite}
+@keyframes typeName{0%,4%{width:0}14%,100%{width:5ch}}
+@keyframes caret{50%{border-color:transparent}}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.go{margin-top:12px;height:38px;border-radius:12px;background:#3e88f7;color:#fff;font-weight:600;font-size:12.5px;display:grid;place-items:center}
+.qn{display:flex;justify-content:space-between;font-size:11px;color:#93a0ae;margin-bottom:6px}
+.bar{height:5px;border-radius:5px;background:#243041;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;width:38%;background:#3e88f7;border-radius:5px}
+.opt{padding:10px 12px;border-radius:12px;border:1px solid #2d3a4c;background:#121a24;font-size:12px;margin-bottom:7px}
+.opt.pick{animation:pick 18s infinite}
+@keyframes pick{0%,48%{border-color:#2d3a4c;background:#121a24}52%,100%{border-color:#3e88f7;background:#1d3550}}
+.ring{position:relative;width:150px;height:150px;margin:8px auto 12px;border-radius:50%;background:conic-gradient(#cde56b calc(var(--p)*1%),#243041 0);animation:ring 18s var(--ease) infinite;display:grid;place-items:center}
+.ring::before{content:"";position:absolute;inset:12px;border-radius:50%;background:#1b2532}
+.ring b{position:relative;font:700 34px/1 -apple-system,"Inter",sans-serif;letter-spacing:-.03em}
+.ring b small{display:block;text-align:center;font-size:11px;color:#93a0ae;font-weight:500;letter-spacing:0;margin-top:4px}
+@keyframes ring{0%,68%{--p:0}82%,100%{--p:74}}
+.mini{display:flex;justify-content:space-between;align-items:center;padding:9px 2px;border-top:1px solid #263345;font-size:12px;color:#c3ccd6}
+.mini b{color:#cde56b}
+.float{position:absolute;z-index:4;display:flex;align-items:center;gap:8px;padding:9px 14px 9px 9px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:0 18px 34px -18px rgba(13,59,44,.5);font:600 13px var(--body);color:var(--ink);animation:bob 9s ease-in-out infinite}
+.float b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--pitch);color:var(--lime)}
+.float b .i{width:15px;height:15px}
+.f1{left:-7%;top:48%;animation-delay:.6s}.f2{right:-1%;bottom:40px;animation-delay:1.8s}.f3{left:42%;top:-6px;animation-delay:1.1s}
+
+/* projects */
+.project{display:grid;grid-template-columns:1fr 1fr;margin-top:24px;transition:transform .35s var(--ease)}
+.project:hover{transform:translateY(-6px)}
+.project .shot{position:relative;min-height:420px;overflow:hidden}
+.project .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.project:hover .shot img{transform:scale(1.06)}
+.project .shot .pill{position:absolute;top:22px;left:22px;z-index:2}
+.project .body{padding:44px;display:flex;flex-direction:column;gap:18px}
+.project h3{font-size:clamp(40px,4.6vw,60px);letter-spacing:-.045em}
+.project .meta{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--dim)}
+.project p{color:var(--soft)}
+.project ul{list-style:none;display:grid;gap:9px;font-size:15px;color:var(--soft)}
+.project ul li{display:flex;gap:10px}
+.project ul li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--pitch)}
+.project .btn{align-self:flex-start}
+
+/* pitch */
+.stadium{min-height:480px;padding:40px;display:flex;flex-direction:column;justify-content:flex-end}
+.stadium img{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px);max-width:none;object-fit:cover;transition:transform 1.4s var(--ease)}
+.stadium:hover img{transform:scale(1.04)}
+.stadium::before{content:"";position:absolute;inset:-2px;z-index:1;background:linear-gradient(90deg,rgba(17,22,18,.95) 0%,rgba(17,22,18,.55) 52%,rgba(17,22,18,.05))}
+.stadium .sweep{position:absolute;top:-20%;bottom:-20%;left:0;width:40%;z-index:1;background:radial-gradient(closest-side,rgba(255,255,255,.12),transparent);animation:sweep 7s ease-in-out infinite;pointer-events:none}
+@keyframes sweep{0%,100%{transform:translateX(60%)}50%{transform:translateX(200%)}}
+.stadium>*:not(img):not(.sweep){position:relative;z-index:2}
+.stadium h2{font-size:clamp(38px,5vw,68px);max-width:12ch;margin:14px 0 18px}
+.stadium p{max-width:40ch;color:var(--soft)}
+.stadium .btn{align-self:flex-start;margin-top:26px}
+.fixtures3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.fx{position:relative;background:var(--card);border:1px solid var(--stroke);border-radius:26px;padding:24px;transition:transform .6s var(--ease)}
+.fx:hover{transform:translateY(-6px)}
+.fx b{display:block;font:700 42px/1 var(--display);letter-spacing:-.04em;color:var(--lime)}
+.fx h3{font-size:19px;letter-spacing:-.02em;margin:14px 0 6px}
+.fx p{font-size:14.5px;color:var(--dim)}
+.quote{margin-top:16px;padding:34px 38px;border-radius:26px;background:var(--lime);color:var(--lime-ink);font:500 clamp(19px,2.2vw,26px)/1.4 var(--display);letter-spacing:-.01em;position:relative;overflow:hidden}
+.quote::before{content:"\201C";position:absolute;right:24px;top:-30px;font:400 220px/1 var(--poster);opacity:.12}
+.quote span{display:block;margin-top:14px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+
+/* beyond: photo news */
+.news{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.news-item{position:relative;display:grid;grid-template-columns:1fr;gap:18px;align-content:start;padding:22px 24px 26px;border-radius:26px;background:var(--card);border:1px solid var(--stroke);transition:transform .6s var(--ease),border-color .3s}
+.news-item:hover{transform:translateY(-4px);border-color:rgba(13,59,44,.3)}
+.thumb{height:92px;border-radius:18px;display:grid;place-items:center;background:var(--paper);border:1px solid var(--stroke)}
+.thumb svg{width:200px;height:52px}
+
+.news-item .eyebrow{display:block;margin-bottom:8px}
+.news-item h3{font-size:21px;letter-spacing:-.025em;margin-bottom:6px}
+.news-item p{font-size:14.5px;color:var(--dim);line-height:1.45}
+
+/* academics with org marks */
+.acad .tiles{grid-template-columns:repeat(3,1fr)}
+.acad .tile{min-height:230px;justify-content:space-between}
+.acad .mark{height:56px;display:flex;align-items:center}
+.acad .mark svg{height:56px;width:auto;max-width:100%}
+.acad .tile b{display:block;font-size:40px;margin-top:26px}
+.acad .tile b+span{display:block;margin-top:8px;font-size:14px;color:var(--dim);line-height:1.4}
+
+/* footer */
+.foot{position:relative;overflow:hidden;color:var(--text);background:radial-gradient(900px 420px at 0 0,rgba(205,229,107,.13),transparent 60%),radial-gradient(700px 380px at 100% 30%,rgba(13,59,44,.55),transparent 65%),#050806;padding:96px 0 0}
+.foot-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+.foot-lines *{fill:none;stroke:rgba(255,255,255,.05);stroke-width:1.5}
+.foot .wrap{position:relative}
+.foot-cta{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:end;padding-bottom:64px;border-bottom:1px solid var(--stroke)}
+.foot-cta h2{font-size:clamp(44px,6vw,88px);letter-spacing:-.05em;line-height:.95;margin-top:16px}
+.foot-cta h2 em{font-style:normal;color:var(--lime)}
+.foot-acts{display:grid;gap:12px}
+.foot-acts .btn{height:62px;font-size:16px}
+.mail{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-radius:20px;border:1px solid var(--stroke);background:rgba(255,255,255,.03);text-decoration:none;font:600 16px var(--display);transition:border-color .2s,background .2s}
+.mail small{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.mail:hover{border-color:rgba(205,229,107,.5);background:rgba(205,229,107,.06)}
+.foot-grid{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:40px;padding:56px 0}
+.foot-brand .mono{color:var(--text);font-size:19px}
+.foot-brand p{margin-top:16px;color:var(--dim);font-size:15px;max-width:34ch}
+.foot h4{display:flex;gap:10px;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-bottom:18px}
+.foot h4 span{color:var(--lime)}
+.foot ul{list-style:none;display:grid;gap:11px;font-size:15px}
+.foot ul a{text-decoration:none;color:var(--soft);background:linear-gradient(var(--lime),var(--lime)) 0 100%/0 1px no-repeat;transition:background-size .3s var(--ease),color .2s}
+.foot ul a:hover{color:var(--text);background-size:100% 1px}
+.foot ul small{display:block;font:500 11px var(--mono);color:var(--dim);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.creds{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 0 56px}
+.cred{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid var(--stroke);transition:border-color .3s,transform .3s var(--ease)}
+.cred:hover{border-color:rgba(205,229,107,.4);transform:translateY(-3px)}
+.cred .ci{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--lime);color:var(--lime-ink);flex:none}
+.cred b{display:block;font:700 16px/1.2 var(--display);color:var(--text)}
+.cred small{font-size:12.5px;color:var(--dim)}
+.foot-legal{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:22px 0;border-top:1px solid var(--stroke);font-size:13px;color:var(--dim)}
+.top-link{display:flex;align-items:center;gap:8px;text-decoration:none;font:600 14px var(--body);color:var(--text)}
+.top-link b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--lime);color:var(--lime-ink);transition:transform .6s var(--ease)}
+.top-link b .i{transform:rotate(-90deg)}
+.top-link:hover b{transform:translateY(-4px)}
+.giant{position:relative;font:400 clamp(48px,10.4vw,170px)/.82 var(--poster);text-transform:uppercase;white-space:nowrap;text-align:center;margin-top:16px;margin-bottom:-.04em;letter-spacing:-.005em;
+  color:transparent;background:linear-gradient(100deg,var(--lime) 0 42%,#f6ffd6 50%,var(--lime) 58% 100%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;animation:pan 6s ease-in-out infinite}
+@keyframes pan{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+
+/* modal form */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.modal:target{opacity:1;visibility:visible}
+.scrim{position:absolute;inset:0;background:rgba(5,8,6,.62);backdrop-filter:blur(10px)}
+.sheet{position:relative;width:min(580px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--paper);color:var(--ink);border-radius:30px;padding:36px;box-shadow:0 60px 120px -40px rgba(0,0,0,.7);transform:translateY(40px) scale(.96);transition:transform .5s var(--ease)}
+.modal:target .sheet{transform:none}
+.sheet::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(205,229,107,.55),transparent 70%);pointer-events:none}
+.x{position:absolute;top:18px;right:18px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--chalk);color:var(--ink);text-decoration:none;font:400 24px/1 var(--body);transition:transform .6s var(--ease),background .2s}
+.x:hover{transform:rotate(90deg);background:var(--lime)}
+.sheet h3{font-size:36px;letter-spacing:-.04em;margin:10px 0 6px;max-width:14ch}
+.sheet>p{color:var(--muted);font-size:15px;margin-bottom:20px}
+.f{display:grid;gap:14px}
+.f label>span{display:block;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 6px 4px}
+.f input[type=text],.f input[type=email],.f textarea{width:100%;border:1.5px solid var(--line);background:#fafbf8;border-radius:16px;padding:14px 16px;font:16px var(--body);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+.f textarea{min-height:120px;resize:vertical}
+.f input:focus,.f textarea:focus{border-color:var(--pitch);background:#fff;box-shadow:0 0 0 4px rgba(205,229,107,.45)}
+.who{display:flex;flex-wrap:wrap;gap:8px;border:0}
+.who legend{font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 6px 4px}
+.who label{cursor:pointer}
+.who input{position:absolute;opacity:0;pointer-events:none}
+.f .who label>span{display:block;margin:0;letter-spacing:0;text-transform:none;padding:9px 14px;border-radius:999px;border:1.5px solid var(--line);font:600 13.5px var(--body);color:var(--ink);transition:background .2s,border-color .2s,color .2s}
+.who label:hover span{border-color:var(--pitch)}
+.who input:checked+span{background:var(--pitch);border-color:var(--pitch);color:var(--lime)}
+.who input:focus-visible+span{box-shadow:0 0 0 4px rgba(205,229,107,.6)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.f .btn{margin-top:6px;width:100%;height:58px}
+.f small{text-align:center;color:var(--muted);font-size:12.5px}
+.done{text-align:center;padding-top:20px}
+.done h3{margin:18px auto 8px}
+.done p{color:var(--muted);margin:0 auto 24px;max-width:36ch}
+.done .btn{display:inline-flex}
+.tick{width:84px;height:84px;margin:0 auto;border-radius:50%;background:var(--pitch);display:grid;place-items:center}
+.tick svg{width:44px;height:44px;fill:none;stroke:var(--lime);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40}
+.modal:target .tick svg{animation:tickdraw .6s .35s var(--ease) forwards}
+@keyframes tickdraw{to{stroke-dashoffset:0}}
+
+/* scroll reveal where supported */
+@supports (animation-timeline: view()){
+  .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+  @keyframes reveal{from{opacity:0;translate:0 28px;scale:.99}to{opacity:1;translate:0 0;scale:1}}
+  .count{animation:count linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  .giant{animation:grow linear both,pan 6s ease-in-out infinite;animation-timeline:view(),auto;animation-range:entry 0% entry 100%,normal}
+  @keyframes grow{from{letter-spacing:.18em;opacity:.15}to{letter-spacing:-.005em;opacity:1}}
+}
+
+@media (max-width:1100px){
+  .bot{grid-template-columns:1fr;padding:44px}
+  .stage{height:600px;max-width:640px;width:100%;margin:0 auto}
+}
+@media (max-width:980px){
+  .tiles,.acad .tiles,.creds{grid-template-columns:1fr 1fr}
+  .story-grid,.project,.foot-cta{grid-template-columns:1fr}
+  .project .shot{min-height:300px}
+  .fixtures3{grid-template-columns:1fr}
+  .news{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+  .sec-h{flex-direction:column;align-items:start}
+  .nav ul{display:none}
+  section{padding:68px 0}
+  .orgs{padding-bottom:68px}
+  .chip{display:none}
+  .hero{height:auto;display:flex;flex-direction:column;padding-top:28px}
+  .hero-top,.hero-bottom,.hero-name,.hero-photo{position:static;transform:none;inset:auto}
+  .hnum{display:none}
+  .hero-name{order:2;margin-top:24px;white-space:normal;font-size:22vw;line-height:.84;position:relative;z-index:1}
+  .hero-name .w{display:block}
+  .hero-photo{order:3;align-self:center;height:auto;width:min(54vw,300px);margin-top:-19vw;position:relative;z-index:2;animation:none}
+  .hero-bottom{order:4;flex-direction:column;align-items:stretch;gap:12px;padding-bottom:28px;margin-top:-40px;position:relative;z-index:3}
+  .hcard{width:auto}
+}
+@media (max-width:560px){
+  :root{--r:26px}
+  .wrap{padding:0 16px}
+  .tiles{gap:10px}
+  .tile{min-height:150px;padding:54px 18px 18px;border-radius:22px}
+  .tile b{font-size:34px}
+  .tile .pill{display:none}
+  .acad .tiles{grid-template-columns:1fr}
+  .acad .tile{min-height:0;padding:22px}
+  .acad .tile b{font-size:32px;margin-top:18px}
+  .story-text,.stadium{padding-left:24px;padding-right:24px}
+  .story-text{padding-bottom:26px}.stadium{padding-top:26px;padding-bottom:26px}
+  .story-photo{height:220px}
+  .side{padding:16px}
+  .cols{grid-template-columns:1fr 1fr}.col.later{display:none}
+  .card.mover{animation:none}
+  .bot{padding:26px 22px}
+  .stage{height:520px}
+  .phone{width:220px;height:462px;border-radius:38px;padding:7px}
+  .phone .scr{border-radius:32px}
+  .p1{left:-2%}.p2{right:-4%}
+  .float{display:none}
+  .project .body{padding:26px 22px}
+  .news-item{grid-template-columns:88px 1fr;gap:14px;border-radius:22px}
+  .thumb{height:88px;border-radius:14px}
+  .band{font-size:26px}
+  .org{width:180px;height:76px}.org svg{width:150px}
+  .foot{padding-top:68px}
+  .foot-cta{padding-bottom:44px}
+  .foot-grid{gap:32px 20px;padding:44px 0}
+  .creds{grid-template-columns:1fr}
+  .sheet{padding:28px 22px;border-radius:24px}
+  .sheet h3{font-size:30px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero-lines *{stroke-dashoffset:0}
+  .msg,.kb{opacity:1}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#0d3b2c"/><g transform="translate(2 0) scale(.96)" fill="#cde56b"><rect x="22" y="24" width="12" height="52" rx="2"/><rect x="22" y="24" width="30" height="11" rx="2"/><rect x="22" y="45" width="24" height="10" rx="2"/><rect x="56" y="24" width="12" height="52" rx="2"/><rect x="56" y="65" width="26" height="11" rx="2"/></g></symbol>
+  <symbol id="ballsym" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#f2f4ee" stroke="#0f1a16" stroke-width="3"/><path d="M50 33l16 11.6-6.1 18.8H40.1L34 44.6z" fill="#0f1a16"/><path d="M50 33V8M66 44.6l22-8M59.9 63.4 72 84M40.1 63.4 28 84M34 44.6l-22-8" stroke="#0f1a16" stroke-width="3" fill="none"/></symbol>
+
+  <!-- stylized organization marks -->
+  <symbol id="o-psg" viewBox="0 0 230 60"><circle cx="30" cy="30" r="27" fill="#13295b"/><clipPath id="cpsg"><circle cx="30" cy="30" r="22"/></clipPath><g clip-path="url(#cpsg)"><rect x="8" y="8" width="44" height="44" fill="#13295b"/><rect x="22" y="6" width="16" height="48" fill="#d7262e"/><rect x="38" y="6" width="3" height="48" fill="#fff"/><rect x="19" y="6" width="3" height="48" fill="#fff"/></g><circle cx="30" cy="30" r="24.5" fill="none" stroke="#fff" stroke-width="1.5"/><text x="68" y="31" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#13295b" letter-spacing="-.5">PSG Academy</text><text x="69" y="49" font-family="Inter,sans-serif" font-size="10.5" fill="#d7262e" letter-spacing="2.5">RUSSIA · MOSCOW</text></symbol>
+  <symbol id="o-cam" viewBox="0 0 230 60"><path d="M8 8h40v22c0 13-9 21-20 25C17 51 8 43 8 30z" fill="#0e2c5c"/><path d="M28 14v36M14 26h28" stroke="#fff" stroke-width="3"/><circle cx="21" cy="19" r="2.6" fill="#e3b23c"/><circle cx="35" cy="19" r="2.6" fill="#e3b23c"/><text x="60" y="30" font-family="Georgia,'Times New Roman',serif" font-size="23" fill="#0e2c5c">Cambridge</text><text x="61" y="50" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="17" fill="#c8102e">English</text></symbol>
+  <symbol id="o-toefl" viewBox="0 0 230 60"><text x="4" y="42" font-family="Space Grotesk,sans-serif" font-weight="700" font-style="italic" font-size="38" fill="#1b5aa6" letter-spacing="-1.5">TOEFL</text><text x="128" y="25" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="15" fill="#e35205">iBT</text><rect x="160" y="30" width="56" height="20" rx="10" fill="#1b5aa6"/><text x="188" y="44.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="12" fill="#fff" letter-spacing="1.5">ETS</text></symbol>
+  <symbol id="o-uwee" viewBox="0 0 230 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#0c7a6b" stroke-width="3"/><ellipse cx="30" cy="30" rx="10" ry="22" fill="none" stroke="#0c7a6b" stroke-width="2.5"/><path d="M8 30h44M11 19h38M11 41h38" stroke="#0c7a6b" stroke-width="2"/><text x="64" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#0c7a6b" letter-spacing="1">UWEE</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="9.5" fill="#55706a" letter-spacing="1.2">BELT AND ROAD CAMP</text></symbol>
+  <symbol id="o-kid" viewBox="0 0 230 60"><path d="M8 52V24h7v6h6v-6h7v6h6v-6h7v28H29V40a5 5 0 0 0-10 0v12z" fill="#f08a1c"/><path d="M24 8l9 8H15z" fill="#e2412e"/><rect x="23" y="16" width="2" height="8" fill="#e2412e"/><text x="54" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="25" fill="#e2412e" letter-spacing="-.5">Kid Castle</text><text x="55" y="50" font-family="Inter,sans-serif" font-size="10" fill="#b8641a" letter-spacing="2">HANGZHOU</text></symbol>
+  <symbol id="o-sk" viewBox="0 0 230 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#111" stroke-width="5" stroke-dasharray="22 6.5"/><circle cx="30" cy="30" r="8" fill="#e6007e"/><text x="64" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#111" letter-spacing="2.5">SKOLKOVO</text><text x="65" y="50" font-family="Inter,sans-serif" font-size="10" fill="#e6007e" letter-spacing="2">KIDSDEV</text></symbol>
+  <symbol id="o-ol" viewBox="0 0 230 60"><g fill="none" stroke="#b8892b" stroke-width="2.4" stroke-linecap="round"><path d="M22 52C10 44 8 28 14 14"/><path d="M38 52c12-8 14-24 8-38"/></g><g fill="#b8892b"><ellipse cx="11" cy="24" rx="3" ry="6" transform="rotate(-20 11 24)"/><ellipse cx="11" cy="36" rx="3" ry="6" transform="rotate(-45 11 36)"/><ellipse cx="17" cy="46" rx="3" ry="6" transform="rotate(-65 17 46)"/><ellipse cx="49" cy="24" rx="3" ry="6" transform="rotate(20 49 24)"/><ellipse cx="49" cy="36" rx="3" ry="6" transform="rotate(45 49 36)"/><ellipse cx="43" cy="46" rx="3" ry="6" transform="rotate(65 43 46)"/></g><path d="M30 20l3 6 6.5 1-4.7 4.6 1.1 6.4L30 35l-5.9 3 1.1-6.4-4.7-4.6 6.5-1z" fill="#b8892b"/><text x="64" y="30" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="18" fill="#7a5a14">All-Russian</text><text x="64" y="49" font-family="Space Grotesk,sans-serif" font-weight="500" font-size="16" fill="#b8892b">Olympiad</text></symbol>
+  <symbol id="o-rondo" viewBox="0 0 230 60"><circle cx="30" cy="30" r="24" fill="#5a2a82"/><path d="M26 40V18l14-4v22" fill="none" stroke="#fff" stroke-width="2.6"/><circle cx="22.5" cy="40" r="4.5" fill="#fff"/><circle cx="36.5" cy="36" r="4.5" fill="#fff"/><text x="64" y="31" font-family="Georgia,serif" font-style="italic" font-size="26" fill="#5a2a82">Rondo</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="10" fill="#8a64a8" letter-spacing="2">SCHOOL CHOIR</text></symbol>
+  <symbol id="o-school" viewBox="0 0 230 60"><path d="M8 6h44v24c0 14-10 22-22 26C18 52 8 44 8 30z" fill="#0d3b2c"/><path d="M16 22c5-2 10-2 14 1 4-3 9-3 14-1v16c-5-2-10-2-14 1-4-3-9-3-14-1z" fill="none" stroke="#cde56b" stroke-width="2.2" stroke-linejoin="round"/><path d="M30 23v16" stroke="#cde56b" stroke-width="2.2"/><text x="64" y="30" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="20" fill="#0d3b2c">High School</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="10" fill="#4f7a3a" letter-spacing="2">MOSCOW</text></symbol>
+
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1 1 2-2M3 12l1 1 2-2M3 18l1 1 2-2"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+</svg>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="mono" href="#top"><svg><use href="#logo"/></svg>Fedor Lushnikov</a>
+    <ul>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#pitch">On the pitch</a></li>
+      <li><a href="#beyond">Beyond</a></li>
+    </ul>
+    <a class="cta" href="#write">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="hero-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle cx="720" cy="560" r="170"/><line x1="0" y1="560" x2="1440" y2="560"/><circle cx="720" cy="560" r="6"/>
+  </svg>
+  <div class="wrap hero-top">
+    <div class="hq">
+      <b>&ldquo;</b>
+      <p>I should either drop this idea or work as hard as it takes to be the leading player.</p>
+      <span>Fedor Lushnikov, college essay</span>
+    </div>
+    <div class="hnum"><b>CS</b><span>Computer Science · Fall 2027</span></div>
+  </div>
+
+  <h1 class="hero-name" aria-label="Fedor Lushnikov"><span class="w" aria-hidden="true"><i style="--i:0">F</i><i style="--i:1">e</i><i style="--i:2">d</i><i style="--i:3">o</i><i style="--i:4">r</i></span> <span class="w" aria-hidden="true"><i style="--i:6">L</i><i style="--i:7">u</i><i style="--i:8">s</i><i style="--i:9">h</i><i style="--i:10">n</i><i style="--i:11">i</i><i style="--i:12">k</i><i style="--i:13">o</i><i style="--i:14">v</i></span></h1>
+  <img class="hero-photo" src="img/fedor-hero.webp" width="720" height="1787" alt="Fedor Lushnikov in his soccer kit, arms crossed">
+
+  <div class="chip c1"><b><svg class="i"><use href="#i-trophy"/></svg></b>Player of the Month</div>
+  <div class="chip c2"><b><svg class="i"><use href="#i-users"/></svg></b>27 people use my bot</div>
+  <div class="chip c3"><b><svg class="i"><use href="#i-code"/></svg></b>Python · Telegram</div>
+
+  <div class="wrap hero-bottom">
+    <a class="hcard proj" href="#projects">
+      <span class="play"><svg class="i"><use href="#i-arrow"/></svg></span>
+      <b>Serenity &amp; LockedIn</b>
+      <small>2 projects · 3 apps · 1,300+ games blocked</small>
+    </a>
+    <a class="hcard next" href="#write">
+      <div class="row"><span class="pill">Next up</span><span>Fall 2027</span></div>
+      <div class="route"><span>Moscow</span><i></i><span>USA</span></div>
+      <div class="row"><span>Computer Science, BS</span><span>Class of 2027</span></div>
+    </a>
+  </div>
+</header>
+
+<div class="bands" aria-hidden="true">
+  <div class="band b1"><div class="track"><span>Build</span><span>Train</span><span>Focus</span><span>Ship</span><span>Repeat</span><span>Build</span><span>Train</span><span>Focus</span><span>Ship</span><span>Repeat</span></div><div class="track"><span>Build</span><span>Train</span><span>Focus</span><span>Ship</span><span>Repeat</span><span>Build</span><span>Train</span><span>Focus</span><span>Ship</span><span>Repeat</span></div></div>
+  <div class="band b2"><div class="track"><span>Code</span><span>Soccer</span><span>Health</span><span>Discipline</span><span>Code</span><span>Soccer</span><span>Health</span><span>Discipline</span><span>Code</span><span>Soccer</span></div><div class="track"><span>Code</span><span>Soccer</span><span>Health</span><span>Discipline</span><span>Code</span><span>Soccer</span><span>Health</span><span>Discipline</span><span>Code</span><span>Soccer</span></div></div>
+</div>
+
+<main>
+
+<div class="light">
+<section class="stats" aria-label="Key numbers">
+  <div class="wrap tiles">
+    <div class="tile glow reveal"><svg class="i ic"><use href="#i-users"/></svg><span class="pill">Bot</span><b class="count c27"></b><span>people use my Telegram health bot</span></div>
+    <div class="tile glow reveal"><svg class="i ic"><use href="#i-code"/></svg><span class="pill">App</span><b><i class="count c1300" style="font-style:normal"></i>+</b><span>games LockedIn blocks during a focus session</span></div>
+    <div class="tile glow reveal"><svg class="i ic"><use href="#i-trophy"/></svg><span class="pill">Pitch</span><b><i class="count c3" style="font-style:normal"></i> years</b><span>of club soccer at PSG Academy Russia</span></div>
+    <div class="tile glow reveal"><svg class="i ic"><use href="#i-cap"/></svg><span class="pill">School</span><b>All A's</b><span>grades 10 and 11, advanced Math, CS and Physics</span></div>
+  </div>
+</section>
+
+<div class="orgs" aria-label="Where I learned, played and volunteered">
+  <span class="eyebrow">Where I learned, played and volunteered</span>
+  <div class="org-strip">
+    <div class="org-track">
+      <div><span class="org"><svg role="img" aria-label="PSG Academy Russia"><use href="#o-psg"/></svg></span><span class="org"><svg role="img" aria-label="Cambridge English"><use href="#o-cam"/></svg></span><span class="org"><svg role="img" aria-label="TOEFL iBT"><use href="#o-toefl"/></svg></span><span class="org"><svg role="img" aria-label="UWEE"><use href="#o-uwee"/></svg></span><span class="org"><svg role="img" aria-label="Kid Castle Kindergarten"><use href="#o-kid"/></svg></span><span class="org"><svg role="img" aria-label="Skolkovo KidsDev"><use href="#o-sk"/></svg></span><span class="org"><svg role="img" aria-label="All-Russian Olympiad"><use href="#o-ol"/></svg></span><span class="org"><svg role="img" aria-label="Choir Rondo"><use href="#o-rondo"/></svg></span></div>
+      <div aria-hidden="true"><span class="org"><svg><use href="#o-psg"/></svg></span><span class="org"><svg><use href="#o-cam"/></svg></span><span class="org"><svg><use href="#o-toefl"/></svg></span><span class="org"><svg><use href="#o-uwee"/></svg></span><span class="org"><svg><use href="#o-kid"/></svg></span><span class="org"><svg><use href="#o-sk"/></svg></span><span class="org"><svg><use href="#o-ol"/></svg></span><span class="org"><svg><use href="#o-rondo"/></svg></span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<section class="story dark" id="story">
+  <div class="wrap story-grid">
+    <div class="screen story-card reveal">
+      <div class="story-photo"><span class="pill">Age 13</span></div>
+      <div class="story-text">
+        <span class="eyebrow">Story</span>
+        <h2>Short of breath, then Player of the Month.</h2>
+        <p>I started playing soccer at 13 with asthma. I could not run half a mile without stopping, while my teammates kept the tempo without effort.</p>
+        <p>So I built a plan. I ran laps before every practice, jogged 4 to 7 kilometers every weekend and tracked my goals and weak spots on a board. After about two months I could keep up with the team. In the 2022/23 season my coaches named me Player of the Month.</p>
+        <p>That board is how I think about code. A product is a long list of small tasks, and finishing them one by one gets you somewhere real. Managing my own health made me want to build tools that help other people do the same.</p>
+      </div>
+    </div>
+
+    <div class="screen side reveal" aria-label="Fedor's board">
+      <div class="side-h"><strong><i class="live"></i>fedor / board</strong><span>Nov 2026</span></div>
+      <div class="cols">
+        <div class="col later">
+          <h4>To do</h4>
+          <div class="card">Study Computer Science in the US<small>fall 2027</small></div>
+          <div class="card">Ship LockedIn as a public release<small>next</small></div>
+        </div>
+        <div class="col doing">
+          <h4>Doing</h4>
+          <div class="card mover">College applications<small>senior year</small></div>
+          <div class="card">Serenity: assistant, planner and health app<small>Skolkovo</small></div>
+        </div>
+        <div class="col done">
+          <h4>Done</h4>
+          <div class="card">Keep pace with my team despite asthma<small>2 months of training</small></div>
+          <div class="card">Player of the Month<small>season 22/23</small></div>
+          <div class="card">TOEFL iBT 100<small>English</small></div>
+        </div>
+      </div>
+      <h3>Timeline</h3>
+      <div class="fixture"><b>Club soccer</b><span>Age<br>13</span><b>Asthma</b></div>
+      <div class="fixture"><b>PSG Academy</b><span>Season<br>22/23</span><b>Player of the Month</b></div>
+      <div class="fixture"><b>Serenity</b><span>Grade<br>10-11</span><b>App ecosystem</b></div>
+      <div class="fixture"><b>LockedIn</b><span>Grade<br>11</span><b>Focus app</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="projects light white" id="projects">
+  <div class="roll" aria-hidden="true"><svg class="ball"><use href="#ballsym"/></svg></div>
+  <div class="wrap">
+    <div class="sec-h reveal">
+      <div>
+        <span class="eyebrow">Projects</span>
+        <h2>Tools I built for real people</h2>
+      </div>
+      <p>Both projects started from a problem I saw around me, and both were tested on people before I called them done.</p>
+    </div>
+
+    <article class="screen bot project-bot reveal" data-role="Sole developer" data-result="3 apps, one account">
+      <div>
+        <span class="pill">App ecosystem · Grades 10-11</span>
+        <h3>Serenity</h3>
+        <span class="handle">serenityapps.online · grew out of @HealthScheduled_Bot</span>
+        <p>An ecosystem of calm apps for studying, planning and self-care, which I am building at Skolkovo. It grew out of my Telegram health bot HealthScheduled, now Serene Vita. I planned the bot for a month with my Social Studies teacher, surveyed students and teachers, and wrote its check-up with a strength and conditioning coach who worked with Russian soccer clubs. Then it grew into three apps on one account.</p>
+        <ol class="steps">
+          <li><span><b>Serene Vita</b> on Telegram: a 21-question check-up, a personal daily plan, goals, streaks and levels, in Russian, English and Spanish.</span></li>
+          <li><span><b>Serene Schedule</b> in the browser: notes, tasks, kanban boards, lecture recording with transcripts and AI summaries. Data stays on your device.</span></li>
+          <li><span><b>Serenity Assistant:</b> one AI assistant that sees your tasks and your health goals, works by text or voice and changes things only after you say yes.</span></li>
+          <li><span><b>One account:</b> sign in once with Telegram or email, and it works in every Serenity app.</span></li>
+        </ol>
+        <div class="acts">
+          <a class="btn lime" href="https://serenityapps.online">Open Serenity<svg class="i"><use href="#i-arrow"/></svg></a>
+          <a class="btn ghost" href="https://t.me/HealthScheduled_Bot">Try the bot</a>
+        </div>
+        <div class="social">
+          <span><svg class="i"><use href="#i-users"/></svg>27 bot users</span>
+          <span><svg class="i"><use href="#i-pulse"/></svg>Health, study, plans</span>
+          <span><svg class="i"><use href="#i-send"/></svg>Telegram, web app, AI assistant</span>
+        </div>
+      </div>
+
+      <div class="stage" aria-label="The bot in Telegram: welcome message, daily goals and the check-up mini app">
+        <div class="float f3"><b><svg class="i"><use href="#i-list"/></svg></b>21-question check-up</div>
+        <div class="float f1"><b><svg class="i"><use href="#i-flame"/></svg></b>Daily streak</div>
+        <div class="float f2"><b><svg class="i"><use href="#i-gauge"/></svg></b>Score out of 10</div>
+
+        <div class="phone p2" aria-hidden="true"><div class="scr">
+          <div class="sbar"><span>9:41</span><i></i></div>
+          <div class="app">
+            <div class="app-h"><img src="img/serene-vita.webp" width="160" height="160" alt="">Serene Vita</div>
+            <div class="slides">
+              <div class="slide"><div class="panel">
+                <h5>Let's get acquainted</h5>
+                <p>A few details about you, and I'll build a personal program.</p>
+                <span class="lbl">Language</span>
+                <div class="seg"><span>Русский</span><span class="on">English</span><span>Español</span></div>
+                <span class="lbl">Name</span>
+                <div class="fld"><span class="typed">Fedor</span></div>
+                <span class="lbl">Gender</span>
+                <div class="seg two"><span class="on">Male</span><span>Female</span></div>
+                <div class="row2"><div><span class="lbl">Height, cm</span><div class="fld">178</div></div><div><span class="lbl">Weight, kg</span><div class="fld">68</div></div></div>
+                <div class="go">Continue</div>
+              </div></div>
+              <div class="slide"><div class="panel">
+                <div class="qn"><span>Check-up</span><span>8 of 21</span></div>
+                <div class="bar"><i></i></div>
+                <h5>How many hours did you sleep last night?</h5>
+                <p>Be honest, nobody is grading you.</p>
+                <div class="opt">Less than 6</div>
+                <div class="opt pick">7 to 8</div>
+                <div class="opt">More than 9</div>
+                <div class="go">Next</div>
+              </div></div>
+              <div class="slide"><div class="panel">
+                <h5>Your quality of life</h5>
+                <p>Based on 21 answers. Daily goals raise it.</p>
+                <div class="ring"><b>7.4<small>out of 10</small></b></div>
+                <div class="mini"><span>Sleep</span><b>Good</b></div>
+                <div class="mini"><span>Activity</span><b>Improve</b></div>
+                <div class="mini"><span>Nutrition</span><b>Good</b></div>
+              </div></div>
+            </div>
+          </div>
+        </div></div>
+
+        <div class="phone p1" aria-hidden="true"><div class="scr">
+          <div class="sbar"><span>9:41</span><i></i></div>
+          <div class="tg-h"><img src="img/serene-vita.webp" width="160" height="160" alt=""><div><b>Serene Vita</b><small>bot</small></div></div>
+          <div class="chat"><div class="feed">
+            <div class="msg out m1">/start<span class="t">12:06</span></div>
+            <div class="msg in typing"><div class="dots"><i></i><i></i><i></i></div></div>
+            <div class="msg in m2">Hi! I'm your personal healthy lifestyle assistant.<br><br>How it works:<ol><li>Quick sign-up: name, age, height, weight and your goal.</li><li>A 21-question check-up: I rate your quality of life out of 10.</li><li>Daily goals with checkboxes: build a streak and raise your score.</li><li>Personal check-ins adjust your plan.</li></ol>You can also just talk to me. Shall we start?<span class="t">12:06</span></div>
+            <div class="kb">Start</div>
+            <div class="msg out m3">Start<span class="t">12:07</span></div>
+            <div class="msg in m4"><b>Today's goals</b><div class="goal g1"><i></i>Drink 2 liters of water</div><div class="goal g2"><i></i>30-minute walk</div><div class="goal g3"><i></i>Lights out by 23:00</div><div class="streak"><svg class="i"><use href="#i-flame"/></svg>Streak: 5 days</div><span class="t">12:07</span></div>
+          </div></div>
+          <div class="inp"><b>App</b><span>Write a message...</span></div>
+        </div></div>
+      </div>
+    </article>
+
+    <article class="screen project glow reveal" data-role="Sole developer" data-result="1300+ games blocked">
+      <div class="shot">
+        <img src="img/lockedin.webp" width="1000" height="747" alt="Fedor coding LockedIn in the school computer lab" loading="lazy">
+        <span class="pill">Desktop app · Grade 11</span>
+      </div>
+      <div class="body">
+        <h3>LockedIn</h3>
+        <div class="meta"><svg class="i"><use href="#i-clock"/></svg>Built for my school's computer labs</div>
+        <p>Students in my school's computer labs kept playing games instead of following the lesson. I talked to our CS teacher and built an app that blocks games for a focus session of any length.</p>
+        <ul>
+          <li>Detects and blocks more than 1,300 known games while a session runs</li>
+          <li>Session length is adjustable, for a lesson or a long study block</li>
+          <li>Built in Python with Flet, code on GitHub</li>
+        </ul>
+        <a class="btn ink" href="#write">Ask for a demo<svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="pitch dark" id="pitch">
+  <div class="wrap">
+    <div class="screen stadium reveal">
+      <img src="img/pitch.webp" width="1400" height="781" alt="Fedor dribbling at a night training session" loading="lazy">
+      <i class="sweep" aria-hidden="true"></i>
+      <span class="eyebrow">On the pitch</span>
+      <h2>Soccer taught me discipline</h2>
+      <p>Three years at PSG Academy Russia in Moscow, grades 8 to 10. Training all year round, on top of school.</p>
+      <a class="btn lime" href="#story">Read my story<svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="fixtures3">
+      <div class="fx glow reveal"><b>3</b><h3>Years of club soccer</h3><p>PSG Academy Russia, Moscow, grades 8 to 10.</p></div>
+      <div class="fx glow reveal"><b>22/23</b><h3>Player of the Month</h3><p>Recognized by my coaches as one of the fastest-improving players that season.</p></div>
+      <div class="fx glow reveal"><b>4-7 km</b><h3>Every weekend</h3><p>My own running plan, on top of team practice, until asthma stopped holding me back.</p></div>
+    </div>
+    <p class="quote reveal">My obsession with programming and computing is tightly connected with my experience as a soccer player, as it serves as a sandbox, where I am able to build anything from scratch.<span>From my college essay</span></p>
+  </div>
+</section>
+
+<section class="beyond light white" id="beyond">
+  <div class="wrap">
+    <div class="sec-h reveal">
+      <div>
+        <span class="eyebrow">Beyond the code</span>
+        <h2>Music, teaching and travel</h2>
+      </div>
+      <p>The things I do when I am not coding or training.</p>
+    </div>
+    <div class="news">
+      <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-rondo"/></svg></div><div><span class="eyebrow">Music | Since grade 1</span><h3>Choir "Rondo"</h3><p>I have sung in my school choir since first grade, and we have won many competitions together.</p></div></div>
+      <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-kid"/></svg></div><div><span class="eyebrow">Volunteering | China</span><h3>Teaching English</h3><p>Two weeks as a volunteer English teacher at Kid Castle Kindergarten in Hangzhou.</p></div></div>
+      <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-uwee"/></svg></div><div><span class="eyebrow">Exchange | China</span><h3>Belt and Road Youth Camp</h3><p>A 10-day academic and practical program with UWEE during the China Tour Autumn Camp.</p></div></div>
+      <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-ol"/></svg></div><div><span class="eyebrow">Academic | Since grade 8</span><h3>All-Russian Olympiad in English</h3><p>Took part every year since grade 8 and became an awardee at the regional stage.</p></div></div>
+      <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-school"/></svg></div><div><span class="eyebrow">School | Events</span><h3>Event volunteer</h3><p>I help run school events, from guiding a visiting delegation of the Ministry of Foreign Affairs to welcoming choirs at a competition we hosted.</p></div></div>
+      <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-sk"/></svg></div><div><span class="eyebrow">Learning | Moscow</span><h3>KidsDev at Skolkovo</h3><p>A programming course at the Skolkovo innovation center in Moscow.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="acad light" id="academics">
+  <div class="wrap">
+    <div class="sec-h reveal">
+      <div>
+        <span class="eyebrow">Academics</span>
+        <h2>School record</h2>
+      </div>
+      <p>Grades, English certificates and competitions, in one place.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile glow reveal"><div class="mark"><svg viewBox="0 0 230 60" role="img" aria-label="High school, Moscow"><use href="#o-school"/></svg></div><div><b>All A's</b><span>Grades 10 and 11</span></div></div>
+      <div class="tile glow reveal"><div class="mark"><svg viewBox="0 0 230 60" role="img" aria-label="High school, Moscow"><use href="#o-school"/></svg></div><div><b>Advanced</b><span>Mathematics, Computer Science, Physics</span></div></div>
+      <div class="tile glow reveal"><div class="mark"><svg viewBox="0 0 230 60" role="img" aria-label="TOEFL iBT"><use href="#o-toefl"/></svg></div><div><b>TOEFL 100</b><span>TOEFL iBT, English proficiency</span></div></div>
+      <div class="tile glow reveal"><div class="mark"><svg viewBox="0 0 230 60" role="img" aria-label="Cambridge English"><use href="#o-cam"/></svg></div><div><b>Cambridge</b><span>Cambridge English diploma</span></div></div>
+      <div class="tile glow reveal"><div class="mark"><svg viewBox="0 0 230 60" role="img" aria-label="All-Russian Olympiad"><use href="#o-ol"/></svg></div><div><b>Awardee</b><span>All-Russian Olympiad in English, regional stage</span></div></div>
+      <div class="tile glow reveal"><div class="mark"><svg viewBox="0 0 230 60" role="img" aria-label="Skolkovo KidsDev"><use href="#o-sk"/></svg></div><div><b>KidsDev</b><span>Programming course at Skolkovo, Moscow</span></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="contact">
+  <svg class="foot-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="40" y="40" width="1360" height="820" rx="6"/><line x1="720" y1="40" x2="720" y2="860"/><circle cx="720" cy="450" r="150"/><rect x="40" y="250" width="200" height="400"/><rect x="1200" y="250" width="200" height="400"/></svg>
+  <div class="wrap">
+    <div class="foot-cta">
+      <div class="reveal">
+        <span class="eyebrow">Contact</span>
+        <h2>Let's talk about <em>code</em>, health or soccer.</h2>
+      </div>
+      <div class="foot-acts reveal">
+        <a class="btn lime" href="#write">Write to me<svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="mail" href="mailto:hello@fedorlushnikov.com"><span>hello@fedorlushnikov.com</span><small>Email</small></a>
+        <a class="mail" href="https://serenityapps.online"><span>serenityapps.online</span><small>Try Serenity</small></a>
+      </div>
+    </div>
+
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="mono" href="#top"><svg><use href="#logo"/></svg>Fedor Lushnikov</a>
+        <p>High school senior from Moscow. I build small tools that help people train, focus and stay healthy, and I am applying to study Computer Science in the US.</p>
+      </div>
+      <div>
+        <h4><span>01</span>Site</h4>
+        <ul>
+          <li><a href="#story">Story</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#pitch">On the pitch</a></li>
+          <li><a href="#beyond">Beyond the code</a></li>
+          <li><a href="#academics">Academics</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span>02</span>Projects</h4>
+        <ul>
+          <li><a href="https://serenityapps.online">Serenity</a></li>
+          <li><a href="#projects">LockedIn</a></li>
+          <li><a href="#story">My board</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span>03</span>Beyond</h4>
+        <ul>
+          <li><a href="#beyond">Choir "Rondo"</a></li>
+          <li><a href="#beyond">Teaching in Hangzhou</a></li>
+          <li><a href="#beyond">Belt and Road Camp</a></li>
+          <li><a href="#beyond">English Olympiad</a></li>
+          <li><a href="#beyond">KidsDev at Skolkovo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span>04</span>Contact</h4>
+        <ul>
+          <li><small>Message</small><a href="#write">Contact form</a></li>
+          <li><small>Email</small><a href="mailto:hello@fedorlushnikov.com">hello@fedorlushnikov.com</a></li>
+          <li><small>Based in</small>Moscow, Russia</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="creds">
+      <div class="cred"><span class="ci"><svg class="i"><use href="#i-book"/></svg></span><div><b>TOEFL iBT 100</b><small>English proficiency</small></div></div>
+      <div class="cred"><span class="ci"><svg class="i"><use href="#i-cap"/></svg></span><div><b>All A's</b><small>Grades 10 and 11</small></div></div>
+      <div class="cred"><span class="ci"><svg class="i"><use href="#i-trophy"/></svg></span><div><b>Player of the Month</b><small>PSG Academy, 22/23</small></div></div>
+      <div class="cred"><span class="ci"><svg class="i"><use href="#i-pin"/></svg></span><div><b>Moscow to the US</b><small>Computer Science, fall 2027</small></div></div>
+    </div>
+
+    <div class="foot-legal">
+      <span>© 2026 Fedor Lushnikov. All rights reserved.</span>
+      <span>Personal portfolio · Updated November 2026</span>
+      <a class="top-link" href="#top">Back to top<b><svg class="i"><use href="#i-arrow"/></svg></b></a>
+    </div>
+  </div>
+  <div class="giant" aria-hidden="true">Fedor Lushnikov</div>
+</footer>
+
+<div class="modal" id="write" role="dialog" aria-modal="true" aria-labelledby="write-h">
+  <a class="scrim" href="#close" aria-label="Close"></a>
+  <div class="sheet">
+    <a class="x" href="#close" aria-label="Close">&times;</a>
+    <span class="eyebrow">Contact</span>
+    <h3 id="write-h">Write to Fedor</h3>
+    <p>Questions about my projects, soccer or my application. The message goes straight to my inbox, and I reply by email.</p>
+    <form class="f" action="https://peq65rotmbeljvgaexgcytwwii0mpnyb.lambda-url.us-east-1.on.aws/" method="post">
+      <label><span>Name</span><input type="text" name="name" required maxlength="120" autocomplete="name"></label>
+      <label><span>Email</span><input type="email" name="email" required maxlength="200" autocomplete="email"></label>
+      <fieldset class="who">
+        <legend>I am</legend>
+        <label><input type="radio" name="who" value="Admissions officer"><span>Admissions officer</span></label>
+        <label><input type="radio" name="who" value="Coach"><span>Coach</span></label>
+        <label><input type="radio" name="who" value="Developer"><span>Developer</span></label>
+        <label><input type="radio" name="who" value="Bot user"><span>Bot user</span></label>
+        <label><input type="radio" name="who" value="Other"><span>Other</span></label>
+      </fieldset>
+      <label><span>Message</span><textarea name="message" required maxlength="5000"></textarea></label>
+      <label class="hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="btn lime" type="submit">Send message<svg class="i"><use href="#i-send"/></svg></button>
+      <small>Or email me directly: hello@fedorlushnikov.com</small>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="sent" role="dialog" aria-modal="true" aria-labelledby="sent-h">
+  <a class="scrim" href="#close" aria-label="Close"></a>
+  <div class="sheet done">
+    <a class="x" href="#close" aria-label="Close">&times;</a>
+    <div class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h3 id="sent-h">Message sent</h3>
+    <p>Thank you for writing. I read every message and will reply to your email soon.</p>
+    <a class="btn ink" href="#close">Back to the site</a>
+  </div>
+</div>
+
+<div class="modal" id="error" role="dialog" aria-modal="true" aria-labelledby="error-h">
+  <a class="scrim" href="#close" aria-label="Close"></a>
+  <div class="sheet done">
+    <a class="x" href="#close" aria-label="Close">&times;</a>
+    <h3 id="error-h">Something is missing</h3>
+    <p>Please fill in the name, a valid email and a short message.</p>
+    <a class="btn lime" href="#write">Try again</a>
+  </div>
+</div>
+
+</body>
+</html>

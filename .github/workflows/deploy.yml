@@ -1,0 +1,29 @@
+name: Deploy site
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/deploy.yml"]
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::818034793268:role/github-actions-client-fedor-lushnikov-deploy
+          aws-region: us-east-1
+      - name: Sync to S3
+        run: |
+          aws s3 sync site/ s3://fedorlushnikov-site-818034793268/ --exclude "index.html" --cache-control "public, max-age=86400"
+          aws s3 cp site/index.html s3://fedorlushnikov-site-818034793268/index.html --content-type "text/html; charset=utf-8" --cache-control "no-cache"
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id E2QUX3F37GPA88 --paths "/*"
+      - name: Check live
+        run: |
+          sleep 20
+          curl -sf "https://fedorlushnikov.com/?cb=$GITHUB_SHA" -o /tmp/live.html
+          cmp -s <(tr -d '\r' < site/index.html) <(tr -d '\r' < /tmp/live.html) && echo "live = main" || { echo "live differs from main"; exit 1; }
