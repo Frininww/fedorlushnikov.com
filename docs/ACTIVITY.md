@@ -1,0 +1,45 @@
+# История активностей
+
+Журнал всех правок сайта fedorlushnikov.com и событий вокруг него. Новые записи сверху.
+Формат записи: дата и время (МСК), что сделано, где (файлы, PR/коммит), проверка.
+
+---
+
+## 2026-11-27
+
+### 21:30 · Сколково в «Beyond the code», Class of 2031 (PR #5)
+- В «Beyond the code» добавлена отдельная карточка «Skolkovo Innovation Center» (Innovation | Moscow): «Moscow's innovation hub, where I am building Serenity…». Стоит первой и растянута на всю ширину (`.news-item.wide`), чтобы 7 карточек не оставляли одну в последнем ряду. Карточка KidsDev осталась как была.
+- Новый логотип `o-skc`: SKOLKOVO с подписью «INNOVATION CENTER» (KidsDev по-прежнему с `o-sk`).
+- В карточке «Next up» в hero: «Class of 2027» → «Class of 2031» (год выпуска; «Fall 2027» — год поступления, не менялся).
+- Файл: `site/index.html`. Проверка: скриншоты headless Chrome 1440 и 390 px (hero и раздел Beyond).
+
+## 2026-11-24
+
+### 23:10 · Журнал и база знаний
+- Добавлены `docs/ACTIVITY.md` (этот файл), `docs/KNOWLEDGE.md` (база знаний по сайту) и `CLAUDE.md` (правило: каждую правку записывать сюда).
+- На сайт не влияет: деплой запускается только изменениями в `site/`.
+
+### 23:06 · Убраны плашки и «27 пользователей» (PR #3, `ca93287`)
+- Удалены три плавающие плашки вокруг фото в hero: «Player of the Month», «27 people use my bot», «Python · Telegram», вместе с CSS `.chip`.
+- Удалена плитка «27 people use my Telegram health bot» в блоке цифр (`.stats`). Блок теперь из 3 плиток: на десктопе 3 колонки, на узких экранах 2 + 1 на всю ширину.
+- Удалён бейдж «27 bot users» в карточке Serenity.
+- Проверка: скриншоты headless Chrome 1440 и 390 px; деплой (Actions run 45477344722) успешен; на живом сайте совпадений с «27 people», «27 bot users», `chip` нет.
+- Первый деплой из аккаунта Frininww.
+
+### ~22:55 · Передача сайта Фёдору
+- Репозиторий `LevAvdoshin/fedorlushnikov.com` передан и принят в аккаунт **Frininww**: `Frininww/fedorlushnikov.com`.
+- После передачи проверено: GitHub Pages включён, домен `fedorlushnikov.com`, HTTPS принудительный, сертификат одобрен (до 2027-02-22), сайт отвечает 200.
+- Форма на сайте шлёт на Gmail Фёдора через formsubmit.co; нужно один раз подтвердить письмо активации от formsubmit.
+
+### 14:44 · KidsDev как программа Сколково (PR #2, `d567aa7`)
+- Уточнено в `site/index.html`: KidsDev показан как программа Инновационного центра Сколково, где идёт Serenity.
+
+### 14:31 · Переезд с AWS на GitHub Pages (PR #1, `deac0d9`)
+- Вместо S3 + OIDC-деплоя (`.github/workflows/deploy.yml`) добавлен `.github/workflows/pages.yml`.
+- Добавлены `site/CNAME` (домен) и `site/.nojekyll`; обновлён README.
+
+## 2026-11-23
+
+### 21:28 · Первая версия сайта (`331b077`)
+- Сайт fedorlushnikov.com: `site/index.html`, шрифты, изображения, иконки.
+- Хостинг тогда: AWS S3, деплой через GitHub OIDC.

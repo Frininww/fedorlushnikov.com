@@ -342,6 +342,7 @@ section{padding:96px 0}
 .news-item .eyebrow{display:block;margin-bottom:8px}
 .news-item h3{font-size:21px;letter-spacing:-.025em;margin-bottom:6px}
 .news-item p{font-size:14.5px;color:var(--dim);line-height:1.45}
+.news-item.wide{grid-column:1/-1;grid-template-columns:280px 1fr;align-items:center;gap:28px}
 
 /* academics with org marks */
 .acad .tiles,.stats .tiles{grid-template-columns:repeat(3,1fr)}
@@ -482,7 +483,7 @@ section{padding:96px 0}
   .p1{left:-2%}.p2{right:-4%}
   .float{display:none}
   .project .body{padding:26px 22px}
-  .news-item{grid-template-columns:88px 1fr;gap:14px;border-radius:22px}
+  .news-item,.news-item.wide{grid-template-columns:88px 1fr;gap:14px;border-radius:22px}
   .thumb{height:88px;border-radius:14px}
   .band{font-size:26px}
   .org{width:180px;height:76px}.org svg{width:150px}
@@ -514,6 +515,7 @@ section{padding:96px 0}
   <symbol id="o-uwee" viewBox="0 0 230 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#0c7a6b" stroke-width="3"/><ellipse cx="30" cy="30" rx="10" ry="22" fill="none" stroke="#0c7a6b" stroke-width="2.5"/><path d="M8 30h44M11 19h38M11 41h38" stroke="#0c7a6b" stroke-width="2"/><text x="64" y="32" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="#0c7a6b" letter-spacing="1">UWEE</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="9.5" fill="#55706a" letter-spacing="1.2">BELT AND ROAD CAMP</text></symbol>
   <symbol id="o-kid" viewBox="0 0 230 60"><path d="M8 52V24h7v6h6v-6h7v6h6v-6h7v28H29V40a5 5 0 0 0-10 0v12z" fill="#f08a1c"/><path d="M24 8l9 8H15z" fill="#e2412e"/><rect x="23" y="16" width="2" height="8" fill="#e2412e"/><text x="54" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="25" fill="#e2412e" letter-spacing="-.5">Kid Castle</text><text x="55" y="50" font-family="Inter,sans-serif" font-size="10" fill="#b8641a" letter-spacing="2">HANGZHOU</text></symbol>
   <symbol id="o-sk" viewBox="0 0 230 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#111" stroke-width="5" stroke-dasharray="22 6.5"/><circle cx="30" cy="30" r="8" fill="#e6007e"/><text x="64" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#111" letter-spacing="2.5">SKOLKOVO</text><text x="65" y="50" font-family="Inter,sans-serif" font-size="10" fill="#e6007e" letter-spacing="2">KIDSDEV</text></symbol>
+  <symbol id="o-skc" viewBox="0 0 230 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#111" stroke-width="5" stroke-dasharray="22 6.5"/><circle cx="30" cy="30" r="8" fill="#e6007e"/><text x="64" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#111" letter-spacing="2.5">SKOLKOVO</text><text x="65" y="50" font-family="Inter,sans-serif" font-size="10" fill="#e6007e" letter-spacing="1.5">INNOVATION CENTER</text></symbol>
   <symbol id="o-ol" viewBox="0 0 230 60"><g fill="none" stroke="#b8892b" stroke-width="2.4" stroke-linecap="round"><path d="M22 52C10 44 8 28 14 14"/><path d="M38 52c12-8 14-24 8-38"/></g><g fill="#b8892b"><ellipse cx="11" cy="24" rx="3" ry="6" transform="rotate(-20 11 24)"/><ellipse cx="11" cy="36" rx="3" ry="6" transform="rotate(-45 11 36)"/><ellipse cx="17" cy="46" rx="3" ry="6" transform="rotate(-65 17 46)"/><ellipse cx="49" cy="24" rx="3" ry="6" transform="rotate(20 49 24)"/><ellipse cx="49" cy="36" rx="3" ry="6" transform="rotate(45 49 36)"/><ellipse cx="43" cy="46" rx="3" ry="6" transform="rotate(65 43 46)"/></g><path d="M30 20l3 6 6.5 1-4.7 4.6 1.1 6.4L30 35l-5.9 3 1.1-6.4-4.7-4.6 6.5-1z" fill="#b8892b"/><text x="64" y="30" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="18" fill="#7a5a14">All-Russian</text><text x="64" y="49" font-family="Space Grotesk,sans-serif" font-weight="500" font-size="16" fill="#b8892b">Olympiad</text></symbol>
   <symbol id="o-rondo" viewBox="0 0 230 60"><circle cx="30" cy="30" r="24" fill="#5a2a82"/><path d="M26 40V18l14-4v22" fill="none" stroke="#fff" stroke-width="2.6"/><circle cx="22.5" cy="40" r="4.5" fill="#fff"/><circle cx="36.5" cy="36" r="4.5" fill="#fff"/><text x="64" y="31" font-family="Georgia,serif" font-style="italic" font-size="26" fill="#5a2a82">Rondo</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="10" fill="#8a64a8" letter-spacing="2">SCHOOL CHOIR</text></symbol>
   <symbol id="o-school" viewBox="0 0 230 60"><path d="M8 6h44v24c0 14-10 22-22 26C18 52 8 44 8 30z" fill="#0d3b2c"/><path d="M16 22c5-2 10-2 14 1 4-3 9-3 14-1v16c-5-2-10-2-14 1-4-3-9-3-14-1z" fill="none" stroke="#cde56b" stroke-width="2.2" stroke-linejoin="round"/><path d="M30 23v16" stroke="#cde56b" stroke-width="2.2"/><text x="64" y="30" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="20" fill="#0d3b2c">High School</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="10" fill="#4f7a3a" letter-spacing="2">MOSCOW</text></symbol>
@@ -574,7 +576,7 @@ section{padding:96px 0}
     <a class="hcard next" href="#write">
       <div class="row"><span class="pill">Next up</span><span>Fall 2027</span></div>
       <div class="route"><span>Moscow</span><i></i><span>USA</span></div>
-      <div class="row"><span>Computer Science, BS</span><span>Class of 2027</span></div>
+      <div class="row"><span>Computer Science, BS</span><span>Class of 2031</span></div>
     </a>
   </div>
 </header>
@@ -790,6 +792,7 @@ section{padding:96px 0}
       <p>The things I do when I am not coding or training.</p>
     </div>
     <div class="news">
+      <div class="news-item wide reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-skc"/></svg></div><div><span class="eyebrow">Innovation | Moscow</span><h3>Skolkovo Innovation Center</h3><p>Moscow's innovation hub, where I am building Serenity, my ecosystem of calm apps for studying, planning and self-care.</p></div></div>
       <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-rondo"/></svg></div><div><span class="eyebrow">Music | Since grade 1</span><h3>Choir "Rondo"</h3><p>I have sung in my school choir since first grade, and we have won many competitions together.</p></div></div>
       <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-kid"/></svg></div><div><span class="eyebrow">Volunteering | China</span><h3>Teaching English</h3><p>Two weeks as a volunteer English teacher at Kid Castle Kindergarten in Hangzhou.</p></div></div>
       <div class="news-item reveal"><div class="thumb"><svg role="img" aria-hidden="true"><use href="#o-uwee"/></svg></div><div><span class="eyebrow">Exchange | China</span><h3>Belt and Road Youth Camp</h3><p>A 10-day academic and practical program with UWEE during the China Tour Autumn Camp.</p></div></div>
