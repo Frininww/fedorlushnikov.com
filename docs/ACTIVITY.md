@@ -5,6 +5,14 @@
 
 ---
 
+## 2026-11-27
+
+### 21:30 · Сколково в «Beyond the code», Class of 2031
+- В «Beyond the code» добавлена отдельная карточка «Skolkovo Innovation Center» (Innovation | Moscow): «Moscow's innovation hub, where I am building Serenity…». Стоит первой и растянута на всю ширину (`.news-item.wide`), чтобы 7 карточек не оставляли одну в последнем ряду. Карточка KidsDev осталась как была.
+- Новый логотип `o-skc`: SKOLKOVO с подписью «INNOVATION CENTER» (KidsDev по-прежнему с `o-sk`).
+- В карточке «Next up» в hero: «Class of 2027» → «Class of 2031» (год выпуска; «Fall 2027» — год поступления, не менялся).
+- Файл: `site/index.html`. Проверка: скриншоты headless Chrome 1440 и 390 px (hero и раздел Beyond).
+
 ## 2026-11-24
 
 ### 23:10 · Журнал и база знаний

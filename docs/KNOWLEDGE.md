@@ -24,14 +24,14 @@
 ## Секции страницы (`site/index.html`)
 | id / класс | Содержание |
 |---|---|
-| `header.hero#top` | Имя, фото, цитата из эссе, карточки «Serenity & LockedIn» и «Next up: Moscow → USA» |
+| `header.hero#top` | Имя, фото, цитата из эссе, карточки «Serenity & LockedIn» и «Next up: Moscow → USA» (Fall 2027, Computer Science BS, Class of 2031) |
 | `.bands` | Бегущие ленты Build / Train / Focus… |
 | `section.stats` | Плитки с цифрами: 1300+ игр LockedIn, 3 года PSG Academy, All A's |
 | `.orgs` | Лента логотипов: PSG Academy, Cambridge, TOEFL, UWEE, Kid Castle, Skolkovo |
 | `#story` | «Short of breath, then Player of the Month.» + доска задач и таймлайн |
 | `#projects` | «Tools I built for real people»: Serenity, бот, LockedIn |
 | `#pitch` | «Soccer taught me discipline» |
-| `#beyond` | «Music, teaching and travel» |
+| `#beyond` | «Beyond the code: Music, teaching and travel». Карточки `.news-item`: Skolkovo Innovation Center (первая, широкая `.wide`), Choir «Rondo», Teaching English, Belt and Road Camp, Olympiad, Event volunteer, KidsDev |
 | `#academics` | «School record»: оценки, TOEFL 100, Cambridge, олимпиада, KidsDev |
 | `footer#contact` | Контакты и форма |
 
@@ -61,5 +61,7 @@
 - Telegram-бот: https://t.me/HealthScheduled_Bot
 
 ## Решения и договорённости
+- 2026-11-27: год выпуска — Class of 2031 (поступление Fall 2027).
+- 2026-11-27: Инновационный центр Сколково — отдельная карточка в «Beyond the code», помимо KidsDev.
 - 2026-11-24: убраны все упоминания числа пользователей бота («27») и плавающие плашки в hero — не показывать эти цифры на сайте.
 - 2026-11-24: хостинг — GitHub Pages вместо AWS S3 (проще, бесплатно, деплой из `main`).
