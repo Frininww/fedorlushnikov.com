@@ -13,6 +13,7 @@
 | Путь | Что там |
 |---|---|
 | `site/index.html` | Весь сайт: разметка, CSS и JS в одном файле |
+| `site/files/` | Документы для скачивания (рекомендательное письмо MyTruv, PDF) |
 | `site/img/` | Фото в `.webp` (hero, игрок, проекты, фон) |
 | `site/fonts/` | Шрифты woff2: Anton, Inter, Space Grotesk |
 | `site/CNAME` | Домен для GitHub Pages |
@@ -27,9 +28,10 @@
 | `header.hero#top` | Имя, фото, цитата из эссе, карточки «Serenity & LockedIn» и «Next up: Moscow → USA» (Fall 2027, Computer Science BS, Class of 2031) |
 | `.bands` | Бегущие ленты Build / Train / Focus… |
 | `section.stats` | Плитки с цифрами: 1300+ игр LockedIn, 3 года PSG Academy, All A's |
-| `.orgs` | Лента логотипов: PSG Academy, Cambridge, TOEFL, UWEE, Kid Castle, Skolkovo |
+| `.orgs` | Лента логотипов: PSG Academy, MyTruv by Checkr, Cambridge, TOEFL, UWEE, Kid Castle, Skolkovo |
 | `#story` | «Short of breath, then Player of the Month.» + доска задач и таймлайн |
 | `#projects` | «Tools I built for real people»: Serenity, бот, LockedIn |
+| `#internship` | «Marketing analytics at MyTruv by Checkr»: стажировка, ментор Lev Avdoshin, превью и PDF рекомендательного письма (`files/`) |
 | `#pitch` | «Soccer taught me discipline» |
 | `#beyond` | «Beyond the code: Music, teaching and travel». Карточки `.news-item`: Skolkovo Innovation Center (первая, широкая `.wide`), Choir «Rondo», Teaching English, Belt and Road Camp, Olympiad, Event volunteer, KidsDev |
 | `#academics` | «School record»: оценки, TOEFL 100, Cambridge, олимпиада, KidsDev |
@@ -61,6 +63,7 @@
 - Telegram-бот: https://t.me/HealthScheduled_Bot
 
 ## Решения и договорённости
+- 2026-11-28: стажировка в MyTruv by Checkr (с ноября 2026 по январь 2027) — отдельный раздел `#internship` с рекомендательным письмом Льва. Результаты стажировки добавить туда же после января. В письме на сайте нет числа пользователей бота.
 - 2026-11-27: год выпуска — Class of 2031 (поступление Fall 2027).
 - 2026-11-27: Инновационный центр Сколково — отдельная карточка в «Beyond the code», помимо KidsDev.
 - 2026-11-24: убраны все упоминания числа пользователей бота («27») и плавающие плашки в hero — не показывать эти цифры на сайте.

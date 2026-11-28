@@ -333,6 +333,11 @@ section{padding:96px 0}
 .quote span{display:block;margin-top:14px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.7}
 
 /* beyond: photo news */
+.intern .project .shot{display:block;min-height:0;padding:64px 48px 48px;background:var(--card-2)}
+.intern .project .shot img{position:static;display:block;width:100%;height:auto;border-radius:6px;box-shadow:0 1px 2px rgba(15,26,22,.08),0 30px 60px -30px rgba(13,59,44,.45)}
+.intern .project:hover .shot img{transform:translateY(-4px)}
+.intern .brand{width:190px;height:50px;color:var(--ink)}
+.intern .meta+.meta{margin-top:-8px}
 .news{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
 .news-item{position:relative;display:grid;grid-template-columns:1fr;gap:18px;align-content:start;padding:22px 24px 26px;border-radius:26px;background:var(--card);border:1px solid var(--stroke);transition:transform .6s var(--ease),border-color .3s}
 .news-item:hover{transform:translateY(-4px);border-color:rgba(13,59,44,.3)}
@@ -483,6 +488,7 @@ section{padding:96px 0}
   .p1{left:-2%}.p2{right:-4%}
   .float{display:none}
   .project .body{padding:26px 22px}
+  .intern .project .shot{padding:56px 22px 26px}
   .news-item,.news-item.wide{grid-template-columns:88px 1fr;gap:14px;border-radius:22px}
   .thumb{height:88px;border-radius:14px}
   .band{font-size:26px}
@@ -516,6 +522,7 @@ section{padding:96px 0}
   <symbol id="o-kid" viewBox="0 0 230 60"><path d="M8 52V24h7v6h6v-6h7v6h6v-6h7v28H29V40a5 5 0 0 0-10 0v12z" fill="#f08a1c"/><path d="M24 8l9 8H15z" fill="#e2412e"/><rect x="23" y="16" width="2" height="8" fill="#e2412e"/><text x="54" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="25" fill="#e2412e" letter-spacing="-.5">Kid Castle</text><text x="55" y="50" font-family="Inter,sans-serif" font-size="10" fill="#b8641a" letter-spacing="2">HANGZHOU</text></symbol>
   <symbol id="o-sk" viewBox="0 0 230 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#111" stroke-width="5" stroke-dasharray="22 6.5"/><circle cx="30" cy="30" r="8" fill="#e6007e"/><text x="64" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#111" letter-spacing="2.5">SKOLKOVO</text><text x="65" y="50" font-family="Inter,sans-serif" font-size="10" fill="#e6007e" letter-spacing="2">KIDSDEV</text></symbol>
   <symbol id="o-skc" viewBox="0 0 230 60"><circle cx="30" cy="30" r="22" fill="none" stroke="#111" stroke-width="5" stroke-dasharray="22 6.5"/><circle cx="30" cy="30" r="8" fill="#e6007e"/><text x="64" y="33" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="#111" letter-spacing="2.5">SKOLKOVO</text><text x="65" y="50" font-family="Inter,sans-serif" font-size="10" fill="#e6007e" letter-spacing="1.5">INNOVATION CENTER</text></symbol>
+  <symbol id="o-mytruv" viewBox="0 0 230 60"><g transform="translate(14 7) scale(1.95)" fill="#111"><path d="M72.7162 15.4561L69.3984 2.99451H72.1632L74.6876 13.1241H76.3705L78.8949 2.99451H81.6597L78.342 15.4561H72.7162Z" /><path d="M60.5739 15.7446C59.0834 15.7446 57.9053 15.2958 57.0398 14.3982C56.1903 13.4847 55.7656 12.2104 55.7656 10.5756V2.99451H58.3861V10.2871C58.3861 11.3129 58.6426 12.0902 59.1555 12.6192C59.6844 13.1481 60.3896 13.4126 61.2711 13.4126C61.8962 13.4126 62.4571 13.2683 62.954 12.9798C63.4669 12.6753 63.8676 12.2505 64.1562 11.7056C64.4446 11.1446 64.5888 10.5115 64.5888 9.80633V2.99451H67.2334V15.4561H64.5888V13.7011H64.5167C64.1642 14.278 63.6432 14.7669 62.954 15.1676C62.2808 15.5523 61.4875 15.7446 60.5739 15.7446Z" /><path d="M43.2494 5.27844H38.7777V11.4731C38.7777 12.0662 38.9459 12.531 39.2825 12.8676C39.6191 13.2041 40.084 13.3724 40.677 13.3724H43.2494V15.7044H40.2202C39.0181 15.7044 38.0565 15.3519 37.3352 14.6467C36.6299 13.9414 36.2773 13.0039 36.2773 11.8338V5.4307V3.12271V-0.0507812H38.7777V2.97045H43.2494V5.27844Z" /><path d="M48.8089 13.5087V7.22582C48.8089 6.6328 48.9772 6.168 49.3138 5.83141C49.6504 5.49483 50.1151 5.32654 50.7082 5.32654H53.2807V2.99451H50.2514C49.0494 2.99451 48.0877 3.34711 47.3664 4.05233C46.6612 4.75756 46.3086 5.69518 46.3086 6.8652V13.5087V15.4961H48.809L48.8089 13.5087Z" /><path d="M26.1324 19.9438L27.5267 15.3759H24.81L21.5645 2.99451H24.3292L26.8536 12.8035H28.224L31.1329 2.99451H33.8737L28.8971 19.9438H26.1324Z" /><path d="M0.0703125 15.424V3.28301H2.69085V5.03805H2.76298C3.08353 4.46105 3.56436 3.98021 4.20547 3.59555C4.86261 3.19486 5.63995 2.99451 6.5375 2.99451C7.53122 2.99451 8.36466 3.2189 9.03783 3.66768C9.711 4.11645 10.1999 4.66941 10.5044 5.32655H10.6246C10.9771 4.66941 11.5141 4.11645 12.2354 3.66768C12.9567 3.2189 13.8221 2.99451 14.8319 2.99451C15.7454 2.99451 16.5468 3.19486 17.2361 3.59555C17.9252 3.99624 18.4541 4.58927 18.8228 5.37463C19.2074 6.14396 19.3998 7.07357 19.3998 8.16345V15.424H16.7792V8.40387C16.7792 7.39413 16.5468 6.63281 16.082 6.11992C15.6172 5.591 14.9842 5.32655 14.1827 5.32655C13.6217 5.32655 13.1008 5.47881 12.6201 5.78334C12.1392 6.07183 11.7545 6.48055 11.466 7.00946C11.1935 7.52235 11.0573 8.09935 11.0573 8.74046V15.424H8.41275V8.40387C8.41275 7.39413 8.18035 6.63281 7.71554 6.11992C7.26676 5.591 6.63367 5.32655 5.81625 5.32655C5.27132 5.32655 4.75843 5.47881 4.27759 5.78334C3.79676 6.07183 3.4121 6.48055 3.1236 7.00946C2.83509 7.52235 2.69085 8.09935 2.69085 8.74046V15.424H0.0703125Z" /></g><text x="16" y="56" font-family="Inter,sans-serif" font-size="10" fill="#5b6b64" letter-spacing="2">BY CHECKR</text><text x="178" y="17" font-family="Inter,sans-serif" font-size="8" fill="#5b6b64">TM</text></symbol>
   <symbol id="o-ol" viewBox="0 0 230 60"><g fill="none" stroke="#b8892b" stroke-width="2.4" stroke-linecap="round"><path d="M22 52C10 44 8 28 14 14"/><path d="M38 52c12-8 14-24 8-38"/></g><g fill="#b8892b"><ellipse cx="11" cy="24" rx="3" ry="6" transform="rotate(-20 11 24)"/><ellipse cx="11" cy="36" rx="3" ry="6" transform="rotate(-45 11 36)"/><ellipse cx="17" cy="46" rx="3" ry="6" transform="rotate(-65 17 46)"/><ellipse cx="49" cy="24" rx="3" ry="6" transform="rotate(20 49 24)"/><ellipse cx="49" cy="36" rx="3" ry="6" transform="rotate(45 49 36)"/><ellipse cx="43" cy="46" rx="3" ry="6" transform="rotate(65 43 46)"/></g><path d="M30 20l3 6 6.5 1-4.7 4.6 1.1 6.4L30 35l-5.9 3 1.1-6.4-4.7-4.6 6.5-1z" fill="#b8892b"/><text x="64" y="30" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="18" fill="#7a5a14">All-Russian</text><text x="64" y="49" font-family="Space Grotesk,sans-serif" font-weight="500" font-size="16" fill="#b8892b">Olympiad</text></symbol>
   <symbol id="o-rondo" viewBox="0 0 230 60"><circle cx="30" cy="30" r="24" fill="#5a2a82"/><path d="M26 40V18l14-4v22" fill="none" stroke="#fff" stroke-width="2.6"/><circle cx="22.5" cy="40" r="4.5" fill="#fff"/><circle cx="36.5" cy="36" r="4.5" fill="#fff"/><text x="64" y="31" font-family="Georgia,serif" font-style="italic" font-size="26" fill="#5a2a82">Rondo</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="10" fill="#8a64a8" letter-spacing="2">SCHOOL CHOIR</text></symbol>
   <symbol id="o-school" viewBox="0 0 230 60"><path d="M8 6h44v24c0 14-10 22-22 26C18 52 8 44 8 30z" fill="#0d3b2c"/><path d="M16 22c5-2 10-2 14 1 4-3 9-3 14-1v16c-5-2-10-2-14 1-4-3-9-3-14-1z" fill="none" stroke="#cde56b" stroke-width="2.2" stroke-linejoin="round"/><path d="M30 23v16" stroke="#cde56b" stroke-width="2.2"/><text x="64" y="30" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="20" fill="#0d3b2c">High School</text><text x="65" y="49" font-family="Inter,sans-serif" font-size="10" fill="#4f7a3a" letter-spacing="2">MOSCOW</text></symbol>
@@ -543,6 +550,7 @@ section{padding:96px 0}
     <ul>
       <li><a href="#story">Story</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#internship">Internship</a></li>
       <li><a href="#pitch">On the pitch</a></li>
       <li><a href="#beyond">Beyond</a></li>
     </ul>
@@ -601,8 +609,8 @@ section{padding:96px 0}
   <span class="eyebrow">Where I learned, played and volunteered</span>
   <div class="org-strip">
     <div class="org-track">
-      <div><span class="org"><svg role="img" aria-label="PSG Academy Russia"><use href="#o-psg"/></svg></span><span class="org"><svg role="img" aria-label="Cambridge English"><use href="#o-cam"/></svg></span><span class="org"><svg role="img" aria-label="TOEFL iBT"><use href="#o-toefl"/></svg></span><span class="org"><svg role="img" aria-label="UWEE"><use href="#o-uwee"/></svg></span><span class="org"><svg role="img" aria-label="Kid Castle Kindergarten"><use href="#o-kid"/></svg></span><span class="org"><svg role="img" aria-label="Skolkovo KidsDev"><use href="#o-sk"/></svg></span><span class="org"><svg role="img" aria-label="All-Russian Olympiad"><use href="#o-ol"/></svg></span><span class="org"><svg role="img" aria-label="Choir Rondo"><use href="#o-rondo"/></svg></span></div>
-      <div aria-hidden="true"><span class="org"><svg><use href="#o-psg"/></svg></span><span class="org"><svg><use href="#o-cam"/></svg></span><span class="org"><svg><use href="#o-toefl"/></svg></span><span class="org"><svg><use href="#o-uwee"/></svg></span><span class="org"><svg><use href="#o-kid"/></svg></span><span class="org"><svg><use href="#o-sk"/></svg></span><span class="org"><svg><use href="#o-ol"/></svg></span><span class="org"><svg><use href="#o-rondo"/></svg></span></div>
+      <div><span class="org"><svg role="img" aria-label="PSG Academy Russia"><use href="#o-psg"/></svg></span><span class="org"><svg role="img" aria-label="MyTruv by Checkr"><use href="#o-mytruv"/></svg></span><span class="org"><svg role="img" aria-label="Cambridge English"><use href="#o-cam"/></svg></span><span class="org"><svg role="img" aria-label="TOEFL iBT"><use href="#o-toefl"/></svg></span><span class="org"><svg role="img" aria-label="UWEE"><use href="#o-uwee"/></svg></span><span class="org"><svg role="img" aria-label="Kid Castle Kindergarten"><use href="#o-kid"/></svg></span><span class="org"><svg role="img" aria-label="Skolkovo KidsDev"><use href="#o-sk"/></svg></span><span class="org"><svg role="img" aria-label="All-Russian Olympiad"><use href="#o-ol"/></svg></span><span class="org"><svg role="img" aria-label="Choir Rondo"><use href="#o-rondo"/></svg></span></div>
+      <div aria-hidden="true"><span class="org"><svg><use href="#o-psg"/></svg></span><span class="org"><svg><use href="#o-mytruv"/></svg></span><span class="org"><svg><use href="#o-cam"/></svg></span><span class="org"><svg><use href="#o-toefl"/></svg></span><span class="org"><svg><use href="#o-uwee"/></svg></span><span class="org"><svg><use href="#o-kid"/></svg></span><span class="org"><svg><use href="#o-sk"/></svg></span><span class="org"><svg><use href="#o-ol"/></svg></span><span class="org"><svg><use href="#o-rondo"/></svg></span></div>
     </div>
   </div>
 </div>
@@ -758,6 +766,40 @@ section{padding:96px 0}
           <li>Built in Python with Flet, code on GitHub</li>
         </ul>
         <a class="btn ink" href="#write">Ask for a demo<svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="intern light" id="internship">
+  <div class="wrap">
+    <div class="sec-h reveal">
+      <div>
+        <span class="eyebrow">Internship</span>
+        <h2>Marketing analytics at MyTruv by Checkr</h2>
+      </div>
+      <p>My first internship at a fintech company in New York. Remote, since November 2026.</p>
+    </div>
+
+    <article class="screen project glow reveal" data-role="Student intern" data-result="Brief for the marketing team">
+      <a class="shot" href="files/Fedor-Lushnikov-MyTruv-Recommendation.pdf" target="_blank" rel="noopener">
+        <img src="img/mytruv-letter.webp" width="1000" height="1294" alt="Letter of recommendation from Lev Avdoshin, Head of B2C Growth at Truv by Checkr" loading="lazy">
+        <span class="pill">Letter of recommendation</span>
+      </a>
+      <div class="body">
+        <svg class="brand" viewBox="0 0 230 60" role="img" aria-label="MyTruv by Checkr"><use href="#o-mytruv"/></svg>
+        <h3>Student intern</h3>
+        <div class="meta"><svg class="i"><use href="#i-clock"/></svg>Since November 2026 · through January 2027</div>
+        <div class="meta"><svg class="i"><use href="#i-users"/></svg>Mentor: Lev Avdoshin, Head of B2C Growth, Truv by Checkr</div>
+        <p>MyTruv is the consumer app of Truv, a fintech company acquired by Checkr. My brief is a real question the team works on: what people actually write about personal finance apps, and what marketing should say because of it.</p>
+        <ul>
+          <li>Collecting App Store reviews of MyTruv and 5 competing finance apps with Python</li>
+          <li>Sorting them by user pain with Claude</li>
+          <li>Checking by hand on 200 reviews how accurate Claude was</li>
+          <li>Turning the findings into a brief for the marketing team</li>
+        </ul>
+        <p>My mentor set the brief and reviews my work. The results go on this page when the internship ends.</p>
+        <a class="btn ink" href="files/Fedor-Lushnikov-MyTruv-Recommendation.pdf" target="_blank" rel="noopener">Read the letter<svg class="i"><use href="#i-arrow"/></svg></a>
       </div>
     </article>
   </div>

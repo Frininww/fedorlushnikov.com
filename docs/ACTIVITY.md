@@ -5,6 +5,14 @@
 
 ---
 
+## 2026-11-28
+
+### 07:10 · Раздел «Internship»: стажировка в MyTruv by Checkr и рекомендательное письмо
+- Новая секция `#internship` между «Projects» и «On the pitch»: «Marketing analytics at MyTruv by Checkr», роль Student intern (с ноября 2026 по январь 2027), ментор Lev Avdoshin (Head of B2C Growth, Truv by Checkr), что делает (отзывы App Store MyTruv и 5 конкурентов, разметка болей через Claude, ручная проверка точности на 200 отзывах, бриф для маркетинга).
+- Рекомендательное письмо Льва: превью страницы `site/img/mytruv-letter.webp`, PDF `site/files/Fedor-Lushnikov-MyTruv-Recommendation.pdf` (кнопка «Read the letter» и клик по превью). В версии для сайта убрано число пользователей бота (правило от 24.11).
+- Логотип `o-mytruv` (wordmark mytruv + BY CHECKR): в карточке и в ленте логотипов после PSG. Пункт «Internship» в меню.
+- Файлы: `site/index.html`, `site/img/mytruv-letter.webp`, `site/files/…pdf`. Проверка: скриншоты Playwright 1440 и 390 px.
+
 ## 2026-11-27
 
 ### 21:30 · Сколково в «Beyond the code», Class of 2031 (PR #5)
